@@ -2,9 +2,15 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Route, Routes } from "react-router-dom";
 
 // import Navbar from "./pages/components/Navbar";
-import { Home, AuthPage, SignupBox } from "./pages";
-import LoginBox from "./pages/Auth/LoginBox";
-import Dashboard from "./pages/Dashboard";
+import {
+  Home,
+  AuthPage,
+  SignupBox,
+  EmployeePage,
+  PayrollPage,
+  Dashboard,
+  LoginBox,
+} from "./pages";
 
 function App() {
   return (
@@ -18,7 +24,10 @@ function App() {
           <Routes>
             <Route path="/" Component={Home}>
               <Route path="/" Component={Dashboard} />
+              <Route path="/employee" Component={EmployeePage} />
+              <Route path="/payroll" Component={PayrollPage} />
             </Route>
+
             <Route path="/auth" element={<AuthPage />}>
               <Route path="login" Component={LoginBox} />
               <Route path="signup" Component={SignupBox} />

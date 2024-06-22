@@ -2,6 +2,9 @@ import { Button } from "./button";
 import { Checkbox } from "./checkbox";
 import { Input } from "./input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
+import { ScrollArea, ScrollBar } from "./scroll-area";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
 import {
   Card,
   CardContent,
@@ -11,15 +14,15 @@ import {
   CardTitle,
 } from "./card";
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "./table"
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./table";
 
 export {
   Button,
@@ -43,4 +46,9 @@ export {
   TableHead,
   TableHeader,
   TableRow,
+  ScrollArea,
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  ScrollBar,
 };
