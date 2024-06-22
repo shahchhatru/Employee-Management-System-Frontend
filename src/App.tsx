@@ -12,6 +12,7 @@ import {
   LoginBox,
   AnalyticsPage,
   ApplicationsPage,
+  ProfilePage,
 } from "./pages";
 
 function App() {
@@ -29,7 +30,8 @@ function App() {
               <Route path="/employee" Component={EmployeePage} />
               <Route path="/payroll" Component={PayrollPage} />
               <Route path="/analytics" Component={AnalyticsPage} />
-              <Route path="/applications" Component={ApplicationsPage} />
+              <Route path="/application" Component={ApplicationsPage} />
+              <Route path="/profile" Component={ProfilePage} />
             </Route>
 
             <Route path="/auth" element={<AuthPage />}>
