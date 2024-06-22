@@ -12,6 +12,7 @@ import {
   BellRing,
   HandCoins,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -29,39 +30,63 @@ const Sidebar = () => {
       {/* Scroll Area with Navigation Tabs */}
       <ScrollArea className="flex-1 h-[70%]">
         <nav className="flex flex-col p-4">
-          <button className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded">
+          <Link
+            to="/"
+            className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded"
+          >
             <HomeIcon className="h-5 w-5 mr-2" />
             <span>Home</span>
-          </button>
-          <button className="flex items-center p-4 gap-2  my-2 hover:bg-custom-mainColor/60 rounded">
+          </Link>
+          <Link
+            to="/profile"
+            className="flex items-center p-4 gap-2  my-2 hover:bg-custom-mainColor/60 rounded"
+          >
             <UserIcon className="h-5 w-5 mr-2" />
             <span>Profile</span>
-          </button>
-          <button className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded">
+          </Link>
+          <Link
+            to="/settings"
+            className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded"
+          >
             <SettingsIcon className="h-5 w-5 mr-2" />
             <span>Settings</span>
-          </button>
+          </Link>
           {/* Add more buttons as needed */}
-          <button className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded">
+          <Link
+            to="/analytics"
+            className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded"
+          >
             <LineChart className="h-5 w-5 mr-2" />
             <span>Analytics</span>
-          </button>
-          <button className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded">
+          </Link>
+          <Link
+            to="/payroll"
+            className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded"
+          >
             <HandCoins className="h-5 w-5 mr-2" />
             <span>Payroll</span>
-          </button>
-          <button className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded">
+          </Link>
+          <Link
+            to="/employee"
+            className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded"
+          >
             <UsersRound className="h-5 w-5 mr-2" />
             <span>Employee</span>
-          </button>
-          <button className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded">
+          </Link>
+          <Link
+            to="/application"
+            className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded"
+          >
             <Files className="h-5 w-5 mr-2" />
             <span>Application</span>
-          </button>
-          <button className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded">
+          </Link>
+          <Link
+            to="/chat"
+            className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded"
+          >
             <MessageCircleDashed className="h-5 w-5 mr-2" />
             <span>Chats</span>
-          </button>
+          </Link>
           <button className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded">
             <BellRing className="h-5 w-5 mr-2" />
             <span>Notifications</span>

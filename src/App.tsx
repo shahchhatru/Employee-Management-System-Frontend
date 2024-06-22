@@ -10,6 +10,8 @@ import {
   PayrollPage,
   Dashboard,
   LoginBox,
+  AnalyticsPage,
+  ApplicationsPage,
 } from "./pages";
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
               <Route path="/" Component={Dashboard} />
               <Route path="/employee" Component={EmployeePage} />
               <Route path="/payroll" Component={PayrollPage} />
+              <Route path="/analytics" Component={AnalyticsPage} />
+              <Route path="/applications" Component={ApplicationsPage} />
             </Route>
 
             <Route path="/auth" element={<AuthPage />}>

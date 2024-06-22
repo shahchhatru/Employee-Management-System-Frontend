@@ -6,6 +6,8 @@ import PayrollPage from "./Payroll";
 import Dashboard from "./Dashboard";
 import LoginBox from "./Auth/LoginBox";
 import ProfilePage from "./Profile/index";
+import AnalyticsPage from "./Analytics";
+import ApplicationsPage from "./Applications";
 
 export {
   Home,
@@ -16,4 +18,6 @@ export {
   Dashboard,
   LoginBox,
   ProfilePage,
+  AnalyticsPage,
+  ApplicationsPage,
 };
