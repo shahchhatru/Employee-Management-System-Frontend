@@ -17,10 +17,7 @@ const loginSchema = z.object({
       /[@$!%*?&#]/,
       "Password must contain at least one special character"
     ),
-
 });
-
-
 
 interface User {
   _id: string;
@@ -61,7 +58,6 @@ const getInitialAuthState = (): AuthState => {
   };
 };
 
-
 const initialState: AuthState = getInitialAuthState();
 
 export const login = createAsyncThunk(
@@ -93,8 +89,6 @@ export const login = createAsyncThunk(
   }
 );
 
-
-
 export const signup = createAsyncThunk(
   "auth/signup",
   async (
@@ -106,7 +100,7 @@ export const signup = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await apiClient.post("/users", {
+      const response = await apiClient.post("/organizations", {
         name,
         email,
         password,
