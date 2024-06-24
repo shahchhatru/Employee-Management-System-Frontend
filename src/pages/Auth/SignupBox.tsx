@@ -97,7 +97,7 @@ function SignupBox({ className }: SignupBoxProps) {
           ).unwrap();
           window.alert(JSON.stringify(response));
           console.log("Signup called");
-          navigate("/login/emailsent");
+          //navigate("auth/login/emailsent");
         }
       }
     } catch (e) {

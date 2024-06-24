@@ -105,7 +105,9 @@ export const signup = createAsyncThunk(
         email,
         password,
       });
+      console.log(response);
       const user: User = response.data.data;
+      toast.success("Signup successful");
       return user;
     } catch (error: any) {
       return rejectWithValue(
