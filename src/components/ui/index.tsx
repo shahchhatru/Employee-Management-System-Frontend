@@ -4,7 +4,17 @@ import { Input } from "./input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 import { ScrollArea, ScrollBar } from "./scroll-area";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import {
   Card,
   CardContent,
@@ -51,4 +61,13 @@ export {
   AlertDescription,
   AlertTitle,
   ScrollBar,
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
 };
