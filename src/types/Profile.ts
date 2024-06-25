@@ -11,27 +11,40 @@ export interface Profile {
     says?: string;
     image?: string;
     user?: User;
+}
+
+export interface ProfileInput {
+
+    firstname?: string;
+    lastname?: string;
+    email?: string;
+    phone?: string;
+    address?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+    says?: string;
+    image?: string;
 
 }
 
 export interface User {
-    _id: string
-    name: string
-    email: string
-    password: string
-    role: string
-    organizationId: string
-    isVerified: boolean
-    verifiedAt: string
-    verificationExpiresAt: any
-    createdAt: string
-    updatedAt: string
-    __v: number
+    _id: string;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    organizationId: string;
+    isVerified: boolean;
+    verifiedAt: string;
+    verificationExpiresAt: any;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
 }
 
 export interface ProfileResponse {
     status: string;
     message: string;
     data: Profile[];
-
 }

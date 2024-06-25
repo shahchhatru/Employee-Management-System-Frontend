@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface UpdateProfileState {
+
     firstname: string;
     lastname: string;
     email: string;
@@ -13,6 +14,7 @@ interface UpdateProfileState {
     image: string;
 }
 const initialState: UpdateProfileState = {
+
     firstname: "",
     lastname: "",
     email: "",
@@ -28,7 +30,7 @@ export const updateProfileSlice = createSlice({
     name: "updateProfile",
     initialState,
     reducers: {
-        updateProfile: (state, action: PayloadAction<UpdateProfileState>) => {
+        updateProfileState: (state, action: PayloadAction<UpdateProfileState>) => {
             state.firstname = action.payload.firstname;
             state.lastname = action.payload.lastname;
             state.email = action.payload.email;
@@ -74,7 +76,7 @@ export const updateProfileSlice = createSlice({
 });
 
 export const {
-    updateProfile,
+    updateProfileState,
     setFirstname,
     setLastname,
     setEmail,

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { ProfileResponse } from "../types/Profile";
+import type { ProfileResponse, ProfileInput } from "../types/Profile";
 import { API_BASE_URL } from "@/constants";
 import { RootState } from "./Store";
 // Define a service using a base URL and expected endpoints
@@ -18,15 +18,21 @@ export const profileApi = createApi({
 
             return headers;
         },
-    }
-    ),
+    }),
     endpoints: (builder) => ({
         getProfile: builder.query<ProfileResponse, void>({
             query: () => `profile`,
+        }),
+        updateProfile: builder.mutation<ProfileResponse, Partial<ProfileInput>>({
+            query: (profile) => ({
+                url: `profile`,
+                method: "PATCH",
+                body: profile,
+            }),
         }),
     }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetProfileQuery } = profileApi;
+export const { useGetProfileQuery, useUpdateProfileMutation } = profileApi;
