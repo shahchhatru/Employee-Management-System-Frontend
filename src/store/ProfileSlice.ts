@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { Profile } from "../types/Profile";
+import type { ProfileResponse } from "../types/Profile";
 import { API_BASE_URL } from "@/constants";
 import { RootState } from "./Store";
 // Define a service using a base URL and expected endpoints
@@ -21,7 +21,7 @@ export const profileApi = createApi({
     }
     ),
     endpoints: (builder) => ({
-        getProfile: builder.query<Profile, void>({
+        getProfile: builder.query<ProfileResponse, void>({
             query: () => `profile`,
         }),
     }),
