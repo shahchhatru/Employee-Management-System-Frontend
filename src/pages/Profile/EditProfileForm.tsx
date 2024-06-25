@@ -9,7 +9,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-
 import { FilePenLine } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/Store";
@@ -47,7 +46,6 @@ const EditProfileForm = ({
   const handleUpdate = async (updatedProfile: Partial<ProfileInput>) => {
     while (isLoading);
     try {
-
       const response = await updateProfile(updatedProfile).unwrap();
       toast.success(`Profile updated successfully ${JSON.stringify(response)}`);
     } catch (error) {
@@ -59,7 +57,6 @@ const EditProfileForm = ({
   useEffect(() => {
     dispatch(
       updateProfileState({
-
         firstname,
         lastname,
         email,
