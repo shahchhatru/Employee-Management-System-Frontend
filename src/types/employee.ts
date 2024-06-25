@@ -23,6 +23,12 @@ export interface EmployeeInputType {
   skills?: string;
   user?: string;
 }
+export interface EmployeeWithUserInputType extends EmployeeInputType {
+  name?: string;
+  email?: string;
+  role?: string;
+  password?: string;
+}
 
 export interface EmployeeUpdateType {
   designation: string;

@@ -9,6 +9,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { generateRandomPassword } from "@/lib/utils";
 import { FilePenLine } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/Store";
@@ -19,16 +20,22 @@ import {
   setskills,
   setUser,
   setEmployeeState,
+  setInitialState,
+  setName,
+  setEmail,
+  setRole,
+  setPassword,
 } from "@/store/EmployeeStateSlice";
-import { EmployeeInputType } from "@/types/employee";
+import { EmployeeInputType, EmployeeWithUserInputType } from "@/types/employee";
 import { useEffect } from "react";
 import {
   useCreateEmployeeMutation,
   useUpdateEmployeeMutation,
 } from "@/store/EmployeeSlice";
 import { toast } from "sonner";
+import { Button } from "@/components/ui";
 
-export interface EmployeeInputProps extends EmployeeInputType {
+export interface EmployeeInputProps extends EmployeeWithUserInputType {
   update: boolean;
 }
 
@@ -39,6 +46,10 @@ const AddEmployeeForm = ({
   skills,
   user,
   update,
+  name,
+  email,
+  role,
+  password,
 }: EmployeeInputProps) => {
   const [createEmployee, { isLoading: isCreateLoading }] =
     useCreateEmployeeMutation();
@@ -52,9 +63,16 @@ const AddEmployeeForm = ({
       toast.success(
         `Employee updated successfully ${JSON.stringify(response)}`
       );
+      dispatch(setInitialState());
     } catch (error) {
       toast.error(`Failed to update employee: ${error}`);
+      dispatch(setInitialState());
     }
+  };
+
+  const handleGeneratePassword = () => {
+    const password = generateRandomPassword();
+    dispatch(setPassword(password));
   };
 
   const handleCreate = async (newEmployee: EmployeeInputType) => {
@@ -117,16 +135,20 @@ const AddEmployeeForm = ({
               onChange={(e) => dispatch(setSalary(parseFloat(e.target.value)))}
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="joiningDate">Joining Date</label>
-            <input
-              type="date"
-              id="joiningDate"
-              className="p-2 border rounded"
-              value={employeeState.joiningDate}
-              onChange={(e) => dispatch(setJoiningDate(e.target.value))}
-            />
-          </div>
+          {update ? (
+            <></>
+          ) : (
+            <div className="flex flex-col">
+              <label htmlFor="joiningDate">Joining Date</label>
+              <input
+                type="date"
+                id="joiningDate"
+                className="p-2 border rounded"
+                value={employeeState.joiningDate}
+                onChange={(e) => dispatch(setJoiningDate(e.target.value))}
+              />
+            </div>
+          )}
           <div className="flex flex-col">
             <label htmlFor="skills">Skill Level</label>
             <input
@@ -137,7 +159,7 @@ const AddEmployeeForm = ({
               onChange={(e) => dispatch(setskills(e.target.value))}
             />
           </div>
-          <div className="flex flex-col col-span-2">
+          {/* <div className="flex flex-col col-span-2">
             <label htmlFor="user">User</label>
             <input
               type="text"
@@ -146,7 +168,52 @@ const AddEmployeeForm = ({
               value={employeeState.user}
               onChange={(e) => dispatch(setUser(e.target.value))}
             />
-          </div>
+          </div> */}
+          {!update ? (
+            <div className="flex flex-col col-span-1">
+              <label htmlFor="user">Username</label>
+              <input
+                type="text"
+                id="name"
+                className="p-2 border rounded"
+                value={employeeState.name}
+                onChange={(e) => dispatch(setName(e.target.value))}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+          {!update ? (
+            <div className="flex flex-col col-span-1">
+              <label htmlFor="user">Email</label>
+              <input
+                type="text"
+                id="email"
+                className="p-2 border rounded"
+                value={employeeState.email}
+                onChange={(e) => dispatch(setEmail(e.target.value))}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+          {!update ? (
+            <div className="flex flex-col col-span-1">
+              <label htmlFor="user">password</label>
+              <div className="flex flex-row w-full">
+                <input
+                  type="text"
+                  id="name"
+                  className="p-2 border rounded w-8/10"
+                  value={employeeState.password}
+                  onChange={(e) => dispatch(setPassword(e.target.value))}
+                />
+                <Button onClick={handleGeneratePassword}>Generate</Button>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
         </AlertDialogDescription>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
