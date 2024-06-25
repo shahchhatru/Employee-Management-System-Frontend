@@ -3,9 +3,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./AuthSlice";
 import { profileApi } from "./ProfileSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import UpdateProfileReducer from './UpdateProfileSlice';
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    updateProfile: UpdateProfileReducer,
     [profileApi.reducerPath]: profileApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
