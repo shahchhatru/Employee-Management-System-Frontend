@@ -18,7 +18,6 @@ import {
   setSalary,
   setJoiningDate,
   setskills,
-  setUser,
   setEmployeeState,
   setInitialState,
   setName,
@@ -82,8 +81,10 @@ const AddEmployeeForm = ({
       toast.success(
         `Employee created successfully ${JSON.stringify(response)}`
       );
+      dispatch(setInitialState());
     } catch (error) {
       toast.error(`Failed to create employee: ${error}`);
+      dispatch(setInitialState());
     }
   };
 
@@ -105,7 +106,7 @@ const AddEmployeeForm = ({
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-fit bg-custom-mainColor/80 p-4 m-2 rounded flex gap-2">
+      <AlertDialogTrigger className="w-full bg-custom-mainColor/80 p-4 m-2 rounded flex gap-2">
         <FilePenLine /> <span>{update ? "Edit" : "Add"}</span>
       </AlertDialogTrigger>
       <AlertDialogContent className="min-w-[70vw]">
@@ -159,16 +160,7 @@ const AddEmployeeForm = ({
               onChange={(e) => dispatch(setskills(e.target.value))}
             />
           </div>
-          {/* <div className="flex flex-col col-span-2">
-            <label htmlFor="user">User</label>
-            <input
-              type="text"
-              id="user"
-              className="p-2 border rounded"
-              value={employeeState.user}
-              onChange={(e) => dispatch(setUser(e.target.value))}
-            />
-          </div> */}
+
           {!update ? (
             <div className="flex flex-col col-span-1">
               <label htmlFor="user">Username</label>
@@ -208,8 +200,28 @@ const AddEmployeeForm = ({
                   value={employeeState.password}
                   onChange={(e) => dispatch(setPassword(e.target.value))}
                 />
-                <Button onClick={handleGeneratePassword}>Generate</Button>
+                <Button
+                  onClick={handleGeneratePassword}
+                  variant="outline"
+                  className="ml-2"
+                >
+                  Generate
+                </Button>
               </div>
+            </div>
+          ) : (
+            <></>
+          )}
+          {!update ? (
+            <div className="flex flex-col col-span-1">
+              <label htmlFor="user">Role</label>
+              <input
+                type="text"
+                id="email"
+                className="p-2 border rounded"
+                value={employeeState.role}
+                onChange={(e) => dispatch(setRole(e.target.value))}
+              />
             </div>
           ) : (
             <></>
