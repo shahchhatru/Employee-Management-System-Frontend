@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   ColumnDef,
   SortingState,
@@ -37,17 +37,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Card,
-  CardContent,
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-  Checkbox,
-} from "@/components/ui";
+import { Card, CardContent, Checkbox } from "@/components/ui";
 import { useGetEmployeeQuery } from "../../store/EmployeeSlice"; // Assuming this is the correct hook to fetch employee data
-import { Employee } from "@/types/employee"; // Assuming this is the correct type for employee data
+import { Employee } from "../../types/employee"; // Assuming this is the correct type for employee data
 
 function DataTableView() {
   const { data, isLoading, error } = useGetEmployeeQuery();
@@ -118,7 +110,7 @@ function DataTableView() {
       enableHiding: false,
     },
     {
-      accessorKey: "user.name",
+      accessorKey: "name",
       header: ({ column }) => (
         <Button
           variant="ghost"
@@ -128,9 +120,10 @@ function DataTableView() {
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       ),
+      cell: ({ row }) => row.original.user.name,
     },
     {
-      accessorKey: "user.email",
+      accessorKey: "email",
       header: ({ column }) => (
         <Button
           variant="ghost"
@@ -140,6 +133,7 @@ function DataTableView() {
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       ),
+      cell: ({ row }) => row.original.user.email,
     },
     {
       accessorKey: "designation",
@@ -205,7 +199,7 @@ function DataTableView() {
   });
 
   if (isLoading) {
-    return <>Loading...</>;
+    return <div>Loading...</div>;
   }
 
   if (error) {
@@ -228,8 +222,8 @@ function DataTableView() {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Fields</SelectLabel>
-                  <SelectItem value="user.name">Name</SelectItem>
-                  <SelectItem value="user.email">Email</SelectItem>
+                  <SelectItem value="name">Name</SelectItem>
+                  <SelectItem value="email">Email</SelectItem>
                   <SelectItem value="designation">Designation</SelectItem>
                 </SelectGroup>
               </SelectContent>
@@ -244,6 +238,7 @@ function DataTableView() {
               }
               className="max-w-sm"
             />
+
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" className="ml-auto">
