@@ -116,7 +116,7 @@ const AddEmployeeForm = ({
           </AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogDescription className="grid grid-cols-2 gap-4 p-4">
-          <div className="flex flex-col">
+          <span className="flex flex-col">
             <label htmlFor="designation">Designation</label>
             <input
               type="text"
@@ -125,8 +125,8 @@ const AddEmployeeForm = ({
               value={employeeState.designation}
               onChange={(e) => dispatch(setDesignation(e.target.value))}
             />
-          </div>
-          <div className="flex flex-col">
+          </span>
+          <span className="flex flex-col">
             <label htmlFor="salary">Salary</label>
             <input
               type="number"
@@ -135,11 +135,11 @@ const AddEmployeeForm = ({
               value={employeeState.salary}
               onChange={(e) => dispatch(setSalary(parseFloat(e.target.value)))}
             />
-          </div>
+          </span>
           {update ? (
             <></>
           ) : (
-            <div className="flex flex-col">
+            <span className="flex flex-col">
               <label htmlFor="joiningDate">Joining Date</label>
               <input
                 type="date"
@@ -148,9 +148,9 @@ const AddEmployeeForm = ({
                 value={employeeState.joiningDate}
                 onChange={(e) => dispatch(setJoiningDate(e.target.value))}
               />
-            </div>
+            </span>
           )}
-          <div className="flex flex-col">
+          <span className="flex flex-col">
             <label htmlFor="skills">Skill Level</label>
             <input
               type="text"
@@ -159,10 +159,10 @@ const AddEmployeeForm = ({
               value={employeeState.skills}
               onChange={(e) => dispatch(setskills(e.target.value))}
             />
-          </div>
+          </span>
 
           {!update ? (
-            <div className="flex flex-col col-span-1">
+            <span className="flex flex-col col-span-1">
               <label htmlFor="user">Username</label>
               <input
                 type="text"
@@ -171,12 +171,12 @@ const AddEmployeeForm = ({
                 value={employeeState.name}
                 onChange={(e) => dispatch(setName(e.target.value))}
               />
-            </div>
+            </span>
           ) : (
             <></>
           )}
           {!update ? (
-            <div className="flex flex-col col-span-1">
+            <span className="flex flex-col col-span-1">
               <label htmlFor="user">Email</label>
               <input
                 type="text"
@@ -185,14 +185,14 @@ const AddEmployeeForm = ({
                 value={employeeState.email}
                 onChange={(e) => dispatch(setEmail(e.target.value))}
               />
-            </div>
+            </span>
           ) : (
             <></>
           )}
           {!update ? (
-            <div className="flex flex-col col-span-1">
+            <span className="flex flex-col col-span-1">
               <label htmlFor="user">password</label>
-              <div className="flex flex-row w-full">
+              <span className="flex flex-row w-full">
                 <input
                   type="text"
                   id="name"
@@ -207,13 +207,13 @@ const AddEmployeeForm = ({
                 >
                   Generate
                 </Button>
-              </div>
-            </div>
+              </span>
+            </span>
           ) : (
             <></>
           )}
           {!update ? (
-            <div className="flex flex-col col-span-1">
+            <span className="flex flex-col col-span-1">
               <label htmlFor="user">Role</label>
               <input
                 type="text"
@@ -222,7 +222,7 @@ const AddEmployeeForm = ({
                 value={employeeState.role}
                 onChange={(e) => dispatch(setRole(e.target.value))}
               />
-            </div>
+            </span>
           ) : (
             <></>
           )}
