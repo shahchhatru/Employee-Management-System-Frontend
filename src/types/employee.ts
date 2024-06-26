@@ -5,6 +5,7 @@ export interface Employee {
   joiningDate?: string;
   skillLevel?: string;
   user?: User;
+  organizationId?: string;
 }
 
 export interface User {
@@ -38,7 +39,7 @@ export interface EmployeeUpdateType {
   user?: string;
 }
 export interface EmployeeResponse {
-  status?: string;
+  status: string;
   message: string;
   data: Employee[];
 }
