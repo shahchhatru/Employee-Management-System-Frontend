@@ -10,12 +10,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-
-
         <App />
-        <Toaster richColors />
-
-
+        <Toaster richColors closeButton />
       </Provider>
     </BrowserRouter>
   </React.StrictMode>
