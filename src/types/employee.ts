@@ -24,7 +24,24 @@ export interface EmployeeInputType {
   skills?: string;
   user?: string;
 }
-export interface EmployeeWithUserInputType extends EmployeeInputType {
+
+export interface EmployeeInputType {
+  designation?: string;
+  salary?: number;
+  joiningDate?: string;
+  skills?: string;
+  user?: string;
+}
+
+export interface EmployeeInputWithoutUserType {
+  designation?: string;
+  salary?: number;
+  joiningDate?: string;
+  skills?: string;
+}
+
+export interface EmployeeWithUserInputType
+  extends EmployeeInputWithoutUserType {
   name?: string;
   email?: string;
   role?: string;

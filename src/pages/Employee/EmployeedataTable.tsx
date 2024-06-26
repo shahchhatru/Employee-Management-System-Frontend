@@ -40,9 +40,11 @@ import {
 import { Card, CardContent, Checkbox } from "@/components/ui";
 import { useGetEmployeeQuery } from "../../store/EmployeeSlice"; // Assuming this is the correct hook to fetch employee data
 import { Employee } from "../../types/employee"; // Assuming this is the correct type for employee data
+import ActionTooltip from "./EmployeeActionToolTip";
 
 function DataTableView() {
   const { data, isLoading, error } = useGetEmployeeQuery();
+
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const handleSelectChange = (id: string, isSelected: boolean) => {
@@ -173,6 +175,16 @@ function DataTableView() {
       ),
       cell: ({ row }) =>
         new Date(row.original.joiningDate).toLocaleDateString(),
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }) => (
+        <ActionTooltip
+          id={row.original.user._id}
+          employeeDetails={row.original}
+        />
+      ),
     },
   ];
 

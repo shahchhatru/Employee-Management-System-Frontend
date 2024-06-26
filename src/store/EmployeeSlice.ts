@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { EmployeeResponse, EmployeeInputType } from "../types/employee";
+import type {
+  EmployeeResponse,
+  EmployeeInputType,
+  EmployeeWithUserInputType,
+} from "../types/employee";
 import { API_BASE_URL } from "@/constants";
 import { RootState } from "./Store";
 
@@ -36,9 +40,12 @@ export const employeeApi = createApi({
       }),
       invalidatesTags: ["Employee"], // Invalidate tags on mutation success
     }),
-    createEmployee: builder.mutation<EmployeeResponse, EmployeeInputType>({
+    createEmployee: builder.mutation<
+      EmployeeResponse,
+      EmployeeWithUserInputType
+    >({
       query: (employee) => ({
-        url: `employee`,
+        url: `employee/user`,
         method: "POST",
         body: employee,
       }),

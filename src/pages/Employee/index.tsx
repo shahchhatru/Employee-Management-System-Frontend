@@ -5,7 +5,10 @@ const EmployeePage = () => {
   return (
     <div className="border-red-400 border-2 w-full h-[95vh] p-2 grid grid-cols-12 grid-rows-12">
       <div className="col-span-1">
-        <AddEmployeeForm update={false} />
+        <AddEmployeeForm
+          update={false}
+          className="bg-custom-mainColor/60 flex gap-2 rounded p-2 text-custom-cardTagText"
+        />
       </div>
 
       {/* <AddEmployeeForm update={true} /> */}

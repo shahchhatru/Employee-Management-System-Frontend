@@ -36,6 +36,8 @@ import { Button } from "@/components/ui";
 
 export interface EmployeeInputProps extends EmployeeWithUserInputType {
   update: boolean;
+  className?: string;
+  text?: boolean;
 }
 
 const AddEmployeeForm = ({
@@ -43,12 +45,13 @@ const AddEmployeeForm = ({
   salary,
   joiningDate,
   skills,
-  user,
   update,
   name,
   email,
   role,
   password,
+  className,
+  text = true,
 }: EmployeeInputProps) => {
   const [createEmployee, { isLoading: isCreateLoading }] =
     useCreateEmployeeMutation();
@@ -96,7 +99,6 @@ const AddEmployeeForm = ({
           salary,
           joiningDate,
           skills,
-          user,
         })
       );
     }
@@ -106,8 +108,8 @@ const AddEmployeeForm = ({
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-full bg-custom-mainColor/80 p-4 m-2 rounded flex gap-2">
-        <FilePenLine /> <span>{update ? "Edit" : "Add"}</span>
+      <AlertDialogTrigger className={`${className}`}>
+        <FilePenLine /> {text ? <span>{update ? "Edit" : "Add"}</span> : ""}
       </AlertDialogTrigger>
       <AlertDialogContent className="min-w-[70vw]">
         <AlertDialogHeader className="w-full">
@@ -151,7 +153,7 @@ const AddEmployeeForm = ({
             </span>
           )}
           <span className="flex flex-col">
-            <label htmlFor="skills">Skill Level</label>
+            <label htmlFor="skills">Skills</label>
             <input
               type="text"
               id="skills"
