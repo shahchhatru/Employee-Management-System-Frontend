@@ -46,6 +46,7 @@ export interface EmployeeWithUserInputType
   email?: string;
   role?: string;
   password?: string;
+  user?: string;
 }
 
 export interface EmployeeUpdateType {

@@ -31,12 +31,12 @@ export const employeeApi = createApi({
     }),
     updateEmployee: builder.mutation<
       EmployeeResponse,
-      Partial<EmployeeInputType>
+      { id: string; employeeData: Partial<EmployeeInputType> }
     >({
-      query: (employee) => ({
-        url: `employee`,
+      query: ({ id, employeeData }) => ({
+        url: `employee/${id}`,
         method: "PATCH",
-        body: employee,
+        body: employeeData,
       }),
       invalidatesTags: ["Employee"], // Invalidate tags on mutation success
     }),

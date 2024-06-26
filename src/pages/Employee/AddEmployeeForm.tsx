@@ -51,6 +51,7 @@ const AddEmployeeForm = ({
   role,
   password,
   className,
+  user,
   text = true,
 }: EmployeeInputProps) => {
   const [createEmployee, { isLoading: isCreateLoading }] =
@@ -61,7 +62,11 @@ const AddEmployeeForm = ({
   const handleUpdate = async (updatedEmployee: Partial<EmployeeInputType>) => {
     while (isLoading);
     try {
-      const response = await updateEmployee(updatedEmployee).unwrap();
+      const response = await updateEmployee({
+        id: user,
+        employeeData: updatedEmployee,
+      }).unwrap();
+
       toast.success(
         `Employee updated successfully ${JSON.stringify(response)}`
       );

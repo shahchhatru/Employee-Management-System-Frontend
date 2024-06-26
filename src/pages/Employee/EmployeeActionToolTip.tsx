@@ -147,6 +147,7 @@ function ActionTooltip({ id, employeeDetails }: ActionTooltipProps) {
             update={true}
             text={false}
             {...employeeDetails}
+            user={employeeDetails?.user._id}
             className="text-custom-mainColor/50"
           />
         </div>
