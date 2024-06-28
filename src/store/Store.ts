@@ -14,10 +14,10 @@ const store = configureStore({
     [profileApi.reducerPath]: profileApi.reducer,
     [employeeApi.reducerPath]: employeeApi.reducer,
     employeeState: EmployeeStateReducer,
-    [applicationApi.reducerPath]: profileApi.reducer,
+    [applicationApi.reducerPath]: applicationApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(profileApi.middleware).concat(employeeApi.middleware).concat(applicationApi.middleware);
+    return getDefaultMiddleware().concat(applicationApi.middleware).concat(profileApi.middleware).concat(employeeApi.middleware);
   },
 });
 
