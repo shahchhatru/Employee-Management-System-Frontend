@@ -235,7 +235,9 @@ const AddEmployeeForm = ({
           )}
         </AlertDialogDescription>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel onClick={() => dispatch(setInitialState())}>
+            Cancel
+          </AlertDialogCancel>
           <AlertDialogAction
             className="bg-custom-mainColor hover:bg-custom-mainColor/70 text-custom-cardTagText"
             onClick={() =>
