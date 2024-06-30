@@ -7,11 +7,11 @@ import ApplicationTable from "./ApplicationDataTable";
 
 function HelloCard({ name }: { name: string }) {
   return (
-    <div className="w-full md:w-1/4 bg-custom-secondaryBackground rounded p-4 flex">
+    <div className="w-full md:w-1/3 bg-custom-secondaryBackground rounded p-4 flex">
       <div className="flex flex-col">
-        <h1 className="text-custom-headingText">Hello</h1>
+
         <div className=" flex items-center  mt-4 p-2 text-custom-primaryText">
-          <span className="w-4/5">Welcome back</span>
+          <span className="w-4/5">Welcome to application page</span>
 
           <span className="w-1/5 ">
             <Lottie animationData={celebrationAnimation} loop={false} />

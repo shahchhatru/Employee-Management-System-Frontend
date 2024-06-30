@@ -10,6 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { ApplicationTypeReturn } from "@/types/application";
 import { Button } from "@/components/ui/button";
+import { Edit2, UserRoundX, CheckCheck } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -26,6 +27,12 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -47,10 +54,7 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
       header: "User",
       cell: ({ row }) => row.original.user?.name || "N/A",
     },
-    {
-      accessorKey: "organization",
-      header: "Organization",
-    },
+
     {
       accessorKey: "supervisor",
       header: "Supervisor",
@@ -59,6 +63,68 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
     {
       accessorKey: "status",
       header: "Status",
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }) => (
+        <div className="flex items-center space-x-4">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    // Handle edit button click
+                  }}
+                >
+                  <Edit2 className="text-custom-mainColor" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Edit</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    // Handle edit button click
+                  }}
+                >
+                  <CheckCheck className="text-custom-mainColor" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <span>Approve</span>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    // Handle edit button click
+                  }}
+                >
+                  <UserRoundX className="text-red-600" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <span>Reject</span>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
+      ),
     },
   ];
 
@@ -81,7 +147,7 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full p-4 mx-2 my-4 bg-custom-primaryBackground rounded border-2 border-custom-secondarBackground">
       <div className="flex items-center py-4 space-x-4">
         <Select value={filterField} onValueChange={setFilterField}>
           <SelectTrigger className="w-[180px]">
@@ -154,9 +220,7 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
+        ></Button>
         <Button
           variant="outline"
           size="sm"
