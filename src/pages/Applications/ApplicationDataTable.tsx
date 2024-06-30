@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   ColumnDef,
   SortingState,
+  ColumnFiltersState,
   useReactTable,
   getCoreRowModel,
   getPaginationRowModel,
@@ -17,9 +18,20 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
 
 function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [filterField, setFilterField] = useState<string>("text");
+  const [filterValue, setFilterValue] = useState<string>("");
 
   const columns: ColumnDef<ApplicationTypeReturn>[] = [
     {
@@ -56,13 +68,41 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
+    onColumnFiltersChange: setColumnFilters,
     state: {
       sorting,
+      columnFilters,
     },
   });
 
+  const handleFilterChange = (value: string) => {
+    setFilterValue(value);
+    table.getColumn(filterField)?.setFilterValue(value);
+  };
+
   return (
     <div className="w-full">
+      <div className="flex items-center py-4 space-x-4">
+        <Select value={filterField} onValueChange={setFilterField}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select a field" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="text">Text</SelectItem>
+            <SelectItem value="type">Type</SelectItem>
+            <SelectItem value="user">User</SelectItem>
+            <SelectItem value="organization">Organization</SelectItem>
+            <SelectItem value="supervisor">Supervisor</SelectItem>
+            <SelectItem value="status">Status</SelectItem>
+          </SelectContent>
+        </Select>
+        <Input
+          placeholder={`Filter by ${filterField}...`}
+          value={filterValue}
+          onChange={(e) => handleFilterChange(e.target.value)}
+          className="max-w-sm"
+        />
+      </div>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
