@@ -9,7 +9,7 @@ import {
 
 import { ApplicationTypeReturn } from "@/types/application";
 import { useState } from "react";
-import { Eye, UserCheck, User } from "lucide-react";
+import { Eye, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDeleteApplicationMutation } from "@/store/ApplicationSlice";
 import { toast } from "sonner";
@@ -73,6 +73,7 @@ const ApplicationDetailModel = ({
                   id={applicationDetails._id}
                   text={applicationDetails.text}
                   supervisor={applicationDetails.supervisor._id}
+                  className="p-4 rounded bg-custom-mainColor text-custom-cardTagText "
                 />
               </div>
             </div>

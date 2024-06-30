@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,10 +24,10 @@ import SelectBox from "./SelectBox";
 
 export interface ApplicationInputProps {
   id?: string;
-  text: string;
-  type: string;
-  supervisor: string;
-  update: boolean;
+  text?: string;
+  type?: string;
+  supervisor?: string;
+  update?: boolean;
   className?: string;
 }
 
