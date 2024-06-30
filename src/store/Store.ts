@@ -6,6 +6,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import UpdateProfileReducer from './UpdateProfileSlice';
 import { employeeApi } from "./EmployeeSlice";
 import EmployeeStateReducer from "./EmployeeStateSlice";
+import ApplicationStateReducer from './ApplicationStateSlice'
 import { applicationApi } from "./ApplicationSlice";
 const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ const store = configureStore({
     [employeeApi.reducerPath]: employeeApi.reducer,
     employeeState: EmployeeStateReducer,
     [applicationApi.reducerPath]: applicationApi.reducer,
+    applicationState: ApplicationStateReducer
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware().concat(applicationApi.middleware).concat(profileApi.middleware).concat(employeeApi.middleware);

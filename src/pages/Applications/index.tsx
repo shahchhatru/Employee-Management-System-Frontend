@@ -9,7 +9,6 @@ function HelloCard({ name }: { name: string }) {
   return (
     <div className="w-full md:w-1/3 bg-custom-secondaryBackground rounded p-4 flex">
       <div className="flex flex-col">
-
         <div className=" flex items-center  mt-4 p-2 text-custom-primaryText">
           <span className="w-4/5">Welcome to application page</span>
 
@@ -41,7 +40,7 @@ function ApplicationsPage() {
     <>
       {authState.user.role === "ADMIN" ? (
         <div className="w-full border-red-400 border-4 min-h-[90vh] flex flex-col">
-          <div className="w-full flex">
+          <div className="w-full flex bg-custom-secondaryBackground">
             <HelloCard name={authState.user.name} />
           </div>
           {/* <div className="w-full flex">

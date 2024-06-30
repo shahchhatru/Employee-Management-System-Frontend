@@ -33,12 +33,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useUpdateApplicationMutation } from "@/store/ApplicationSlice";
+import { toast } from "sonner";
+import ApplicationDetailModel from "./ApplicationDetail";
 
 function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [filterField, setFilterField] = useState<string>("text");
   const [filterValue, setFilterValue] = useState<string>("");
+  const [updateApplication, { isLoading, isError }] =
+    useUpdateApplicationMutation();
 
   const columns: ColumnDef<ApplicationTypeReturn>[] = [
     {
@@ -69,6 +74,7 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
       header: "Actions",
       cell: ({ row }) => (
         <div className="flex items-center space-x-4">
+          <ApplicationDetailModel applicationDetails={row.original} />
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
@@ -77,24 +83,18 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
                   size="sm"
                   onClick={() => {
                     // Handle edit button click
-                  }}
-                >
-                  <Edit2 className="text-custom-mainColor" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Edit</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    // Handle edit button click
+                    while (isLoading);
+                    updateApplication({
+                      id: row.original._id,
+                      applicationData: {
+                        status: "APPROVED",
+                      },
+                    });
+                    if (!isError) {
+                      toast.success("Application Approved Successfully");
+                    } else {
+                      toast.error("Failed to Approve Applications");
+                    }
                   }}
                 >
                   <CheckCheck className="text-custom-mainColor" />
@@ -113,6 +113,18 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
                   size="sm"
                   onClick={() => {
                     // Handle edit button click
+                    while (isLoading);
+                    updateApplication({
+                      id: row.original._id,
+                      applicationData: {
+                        status: "REJECTED",
+                      },
+                    });
+                    if (!isError) {
+                      toast.success("Application Rejected Successfully");
+                    } else {
+                      toast.error("Failed to Reject Applications");
+                    }
                   }}
                 >
                   <UserRoundX className="text-red-600" />
