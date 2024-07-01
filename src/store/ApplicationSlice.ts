@@ -11,7 +11,7 @@ export const applicationApi = createApi({
     baseUrl: API_BASE_URL,
     prepareHeaders: (headers, { getState }) => {
       // Get the auth token from the state
-      const token = (getState() as RootState).auth.accessToken;
+      const token = (getState() as RootState).auth?.accessToken;
 
       // If we have a token, set the Authorization header
       if (token) {

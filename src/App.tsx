@@ -16,6 +16,7 @@ import {
 } from "./pages";
 import ResetEmailComponent from "./pages/Auth/ResetEmail";
 import EmailSent from "./pages/Auth/EmailSent";
+import ResetPasswordComponent from "./pages/Auth/ResetPassword";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route path="signup" Component={SignupBox} />
               <Route path="resetemail" Component={ResetEmailComponent} />
               <Route path="emailsent" Component={EmailSent} />
+              <Route path="resetpassword/:token" Component={ResetPasswordComponent} />
             </Route>
           </Routes>
         </div>
