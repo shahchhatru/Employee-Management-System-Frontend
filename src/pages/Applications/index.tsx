@@ -10,7 +10,6 @@ import {
 import ApplicationTable from "./ApplicationDataTable";
 import AddApplicationForm from "./EditApplicationBox";
 import { ScrollArea } from "@/components/ui";
-import { Label } from "@/components/ui/label";
 function HelloCard({ name }: { name: string }) {
   return (
     <div className="w-full md:w-1/3 bg-custom-secondaryBackground rounded p-4 flex">

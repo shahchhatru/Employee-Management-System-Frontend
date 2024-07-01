@@ -14,6 +14,8 @@ import {
   ApplicationsPage,
   ProfilePage,
 } from "./pages";
+import ResetEmailComponent from "./pages/Auth/ResetEmail";
+import EmailSent from "./pages/Auth/EmailSent";
 
 function App() {
   return (
@@ -37,6 +39,8 @@ function App() {
             <Route path="/auth" element={<AuthPage />}>
               <Route path="login" Component={LoginBox} />
               <Route path="signup" Component={SignupBox} />
+              <Route path="resetemail" Component={ResetEmailComponent} />
+              <Route path="emailsent" Component={EmailSent} />
             </Route>
           </Routes>
         </div>
