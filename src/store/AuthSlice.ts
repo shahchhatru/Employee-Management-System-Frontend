@@ -278,9 +278,9 @@ const authSlice = createSlice({
         state.error = { message: action.payload as string };
         toast.error("Password Change Failed" + state.error);
       })
-  });
-  },
-});
+  }
+},
+);
 
 export const { logout, setEmail, setPassword, clearErrors } = authSlice.actions;
 export default authSlice.reducer;
