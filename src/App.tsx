@@ -42,7 +42,11 @@ function App() {
               <Route path="signup" Component={SignupBox} />
               <Route path="resetemail" Component={ResetEmailComponent} />
               <Route path="emailsent" Component={EmailSent} />
-              <Route path="resetpassword/:token" Component={ResetPasswordComponent} />
+              <Route
+                path="resetpassword/:token"
+                Component={ResetPasswordComponent}
+              />
+              <Route path="*" Component={LoginBox} />
             </Route>
           </Routes>
         </div>

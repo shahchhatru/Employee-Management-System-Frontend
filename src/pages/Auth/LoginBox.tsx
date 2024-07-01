@@ -74,6 +74,7 @@ function LoginBox({ className }: LoginBoxProps) {
           </Link>
         </div>
       </div>
+
       <div className="p-4 w-full grid grid-cols-6">
         <Button
           className="bg-custom-mainColor col-start-1 col-end-3 rounded-full  hover:bg-custom-stonewhite hover:text-black text-custom-cardTagText"
@@ -83,7 +84,7 @@ function LoginBox({ className }: LoginBoxProps) {
         </Button>
         <div className="col-start-4 col-end-7 flex items-center space-x-2 text-sm">
           <span>Forget Password?</span>
-          <Link to="/auth/signup" className="text-red-400 cursor-pointer">
+          <Link to="/auth/resetemail" className="text-red-400 cursor-pointer">
             Click Here
           </Link>
         </div>
