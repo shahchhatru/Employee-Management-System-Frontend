@@ -172,6 +172,26 @@ export const resetPassword = createAsyncThunk(
   }
 );
 
+export const changepassword = createAsyncThunk(
+  "auth/changepassword",
+  async (
+    { oldPassword, newPassword }: { oldPassword: string; newPassword: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await apiClient.post("/auth/changepassword", {
+        oldPassword,
+        newPassword,
+      });
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(
+        error.response?.data?.message || "Change password failed"
+      );
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -249,7 +269,16 @@ const authSlice = createSlice({
       .addCase(forgotPassword.rejected, (state, action) => {
         state.error = { message: action.payload as string };
         toast.error("Password Reset Failed" + state.error);
-      });
+      }).addCase(changepassword.fulfilled, (state, action) => {
+        state.error = null;
+        state.password = "";
+        toast.success("Password Changed Successfully");
+      }).addCase(changepassword.rejected, (state, action) => {
+        state.password = "";
+        state.error = { message: action.payload as string };
+        toast.error("Password Change Failed" + state.error);
+      })
+  });
   },
 });
 
