@@ -61,7 +61,10 @@ const SettingsPage = () => {
               required
             />
           </Label>
-          <Button type="submit" className="bg-blue-500 text-white p-2 rounded">
+          <Button
+            type="submit"
+            className="bg-custom-mainColor/80 text-white p-2 rounded"
+          >
             Change Password
           </Button>
         </form>
