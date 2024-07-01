@@ -33,8 +33,18 @@ export const salaryApi = createApi({
             query: (user) => `salary/${user}`,
             providesTags: ["Salary"],
         }),
-        getSalaries: builder.query<SalaryResponse[], void>({
-            query: () => `salary/user`,
+        getSalaries: builder.query<SalaryResponse[], {
+            user?: string;
+            month?: string;
+            year?: string;
+        }>({
+            query: (params) => {
+                const queryParams = new URLSearchParams();
+                if (params.user) queryParams.append('user', params.user);
+                if (params.month) queryParams.append('month', params.month);
+                if (params.year) queryParams.append('year', params.year);
+                return `salary/user?${queryParams.toString()}`;
+            },
             providesTags: ["Salary"],
         }),
     }),
