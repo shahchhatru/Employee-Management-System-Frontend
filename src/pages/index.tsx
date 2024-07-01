@@ -8,6 +8,7 @@ import LoginBox from "./Auth/LoginBox";
 import ProfilePage from "./Profile/index";
 import AnalyticsPage from "./Analytics";
 import ApplicationsPage from "./Applications";
+import SettingsPage from "./Settings";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   ProfilePage,
   AnalyticsPage,
   ApplicationsPage,
+  SettingsPage,
 };

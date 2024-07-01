@@ -1,7 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import { Route, Routes } from "react-router-dom";
-
-// import Navbar from "./pages/components/Navbar";
 import {
   Home,
   AuthPage,
@@ -13,6 +11,7 @@ import {
   AnalyticsPage,
   ApplicationsPage,
   ProfilePage,
+  SettingsPage,
 } from "./pages";
 import ResetEmailComponent from "./pages/Auth/ResetEmail";
 import EmailSent from "./pages/Auth/EmailSent";
@@ -35,6 +34,7 @@ function App() {
               <Route path="/analytics" Component={AnalyticsPage} />
               <Route path="/application" Component={ApplicationsPage} />
               <Route path="/profile" Component={ProfilePage} />
+              <Route path="/settings" Component={SettingsPage} />
             </Route>
 
             <Route path="/auth" element={<AuthPage />}>
