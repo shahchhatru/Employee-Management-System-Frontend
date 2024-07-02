@@ -1,3 +1,5 @@
+import { Salary } from "./salary";
+
 export interface Employee {
   _id?: string;
   designation: string;
@@ -6,6 +8,7 @@ export interface Employee {
   skillLevel?: string;
   user?: User;
   organizationId?: string;
+  bonus?: string[];
 }
 
 export interface User {
@@ -23,6 +26,7 @@ export interface EmployeeInputType {
   joiningDate?: string;
   skills?: string;
   user?: string;
+  bonus?: string[];
 }
 
 export interface EmployeeInputType {
@@ -31,6 +35,7 @@ export interface EmployeeInputType {
   joiningDate?: string;
   skills?: string;
   user?: string;
+  bonus?: string[];
 }
 
 export interface EmployeeInputWithoutUserType {
@@ -38,6 +43,7 @@ export interface EmployeeInputWithoutUserType {
   salary?: number;
   joiningDate?: string;
   skills?: string;
+  bonus?: string[];
 }
 
 export interface EmployeeWithUserInputType

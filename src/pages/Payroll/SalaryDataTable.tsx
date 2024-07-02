@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   ColumnDef,
   flexRender,
@@ -52,6 +51,18 @@ function SalaryDataTable() {
       header: "Paid",
       cell: ({ row }) => (isPaid(row.original.joiningDate) ? "Yes" : "No"),
     },
+    {
+      accessorKey: "bonus",
+      header: "Bonus",
+      cell: ({ row }) => (
+        <span className="flex flex-wrap gap-2 ">
+          {row.original.bonus?.map((b) => (
+            <span>{b}</span>
+          ))}
+        </span>
+      ),
+    },
+
     {
       accessorKey: "actions",
       header: "Actions",
