@@ -15,6 +15,7 @@ import {
 import { Card, CardContent } from "@/components/ui";
 import { useGetEmployeeQuery } from "../../store/EmployeeSlice";
 import { Employee } from "../../types/employee";
+import BonusActionTooltip from "./ActionTooltip";
 
 function SalaryDataTable() {
   const { data, isLoading, error } = useGetEmployeeQuery();
@@ -57,7 +58,7 @@ function SalaryDataTable() {
       cell: ({ row }) => (
         <span className="flex flex-wrap gap-2 ">
           {row.original.bonus?.map((b) => (
-            <span>{b}</span>
+            <span key={b}>{b}</span>
           ))}
         </span>
       ),
@@ -66,6 +67,9 @@ function SalaryDataTable() {
     {
       accessorKey: "actions",
       header: "Actions",
+      cell: ({ row }) => (
+        <BonusActionTooltip userId={row.original.user._id.toString()} />
+      ),
     },
   ];
 

@@ -38,6 +38,14 @@ export interface EmployeeInputType {
   bonus?: string[];
 }
 
+export interface TotalBonusResponse {
+  status: string;
+  message: string;
+  data: {
+    totalBonus: number;
+  };
+}
+
 export interface EmployeeInputWithoutUserType {
   designation?: string;
   salary?: number;

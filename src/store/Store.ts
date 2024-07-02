@@ -1,15 +1,16 @@
-// src/store/store.ts
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./AuthSlice";
 import { profileApi } from "./ProfileSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import UpdateProfileReducer from './UpdateProfileSlice';
+import UpdateProfileReducer from "./UpdateProfileSlice";
 import { employeeApi } from "./EmployeeSlice";
 import EmployeeStateReducer from "./EmployeeStateSlice";
-import ApplicationStateReducer from './ApplicationStateSlice';
-import SalaryReducer from './SalaryStateSlice';
+import ApplicationStateReducer from "./ApplicationStateSlice";
+import SalaryReducer from "./SalaryStateSlice";
 import { applicationApi } from "./ApplicationSlice";
 import { userApi } from "./UserSlice";
+import { bonusApi } from "./BonusSlice";
+
 const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -20,10 +21,16 @@ const store = configureStore({
     [applicationApi.reducerPath]: applicationApi.reducer,
     applicationState: ApplicationStateReducer,
     salaryState: SalaryReducer,
-    [userApi.reducerPath]: userApi.reducer
+    [userApi.reducerPath]: userApi.reducer,
+    [bonusApi.reducerPath]: bonusApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(applicationApi.middleware).concat(profileApi.middleware).concat(employeeApi.middleware).concat(userApi.middleware);
+    return getDefaultMiddleware()
+      .concat(applicationApi.middleware)
+      .concat(profileApi.middleware)
+      .concat(employeeApi.middleware)
+      .concat(userApi.middleware)
+      .concat(bonusApi.middleware);
   },
 });
 
