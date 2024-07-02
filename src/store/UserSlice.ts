@@ -21,7 +21,7 @@ export const userApi = createApi({
             query: () => "users",
             providesTags: ["User"],
         }),
-        getAllUsers: builder.query<UserResponse[], void>({
+        getAllUsers: builder.query<UserResponse, void>({
             query: () => "users/all",
             providesTags: ["User"],
         }),

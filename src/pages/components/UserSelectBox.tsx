@@ -13,9 +13,10 @@ import {
 interface UserSelectProps {
     defaultValue?: string;
     onChange: (value: string) => void;
+    className?: string;
 }
 
-const UserSelect: React.FC<UserSelectProps> = ({ defaultValue, onChange }) => {
+const UserSelect: React.FC<UserSelectProps> = ({ defaultValue, onChange, className }) => {
     const { data, error, isLoading } = useGetAllUsersQuery();
     const [selectedUser, setSelectedUser] = React.useState<string | undefined>(defaultValue);
 
@@ -33,11 +34,11 @@ const UserSelect: React.FC<UserSelectProps> = ({ defaultValue, onChange }) => {
         </SelectItem>
     ));
 
-    const defaultUserLabel = data?.data.find(user => user._id === defaultValue)?.name;
+    // const defaultUserLabel = data?.data.find(user => user._id === defaultValue)?.name;
 
     return (
-        <Select onValueChange={handleChange} value={selectedUser}>
-            <SelectTrigger className="w-[180px]">
+        <Select onValueChange={handleChange} value={selectedUser} defaultValue={defaultValue}>
+            <SelectTrigger className={`min-w-[180px] ${className}`}>
                 <SelectValue placeholder="Select a user" />
             </SelectTrigger>
             <SelectContent>
