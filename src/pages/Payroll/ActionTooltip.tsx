@@ -146,10 +146,6 @@ function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
               Total: <DollarSign className="text-blue-700" />{" "}
               {totalBonus?.data?.totalBonus || 0}
             </span>
-            {/* <span>
-              Total Bonus:{" "}
-              {JSON.stringify(totalBonus?.data.totalBonus || {}) || 0}
-            </span> */}
           </span>
         </span>
       </HoverCardContent>
