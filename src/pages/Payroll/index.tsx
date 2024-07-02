@@ -22,13 +22,13 @@ const PayrollComponent = () => {
 
   return (
     <div className="w-full h-[90vh] border-red-400 border-4 grid grid-cols-12 grid-rows-12">
-      <div className="col-span-12 row-start-1 row-end-2 bg-green-400 flex justify-center items-center">
+      <div className="col-span-12 row-start-1 row-end-2 text-2xl flex justify-center items-center">
         <h1 className="text-custom-headingText">
           Upcoming Payroll for {currentMonth} {currentYear}
         </h1>
       </div>
 
-      <ScrollArea className="col-span-12 row-start-6 row-end-13 bg-red-400">
+      <ScrollArea className="col-span-12 row-start-6 row-end-13 ">
         <SalaryDataTable />
       </ScrollArea>
     </div>
