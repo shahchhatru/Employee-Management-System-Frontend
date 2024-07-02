@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Trash2, Eye, User, Calendar, Mail, DollarSign } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Employee } from "@/types/employee";
 import { useDeleteEmployeeMutation } from "@/store/EmployeeSlice";

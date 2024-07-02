@@ -67,3 +67,9 @@ export interface EmployeeResponse {
   message: string;
   data: Employee[];
 }
+
+export interface BonusResponse {
+  status: string;
+  message: string;
+  data: Employee;
+}
