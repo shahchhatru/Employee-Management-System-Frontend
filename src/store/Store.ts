@@ -9,6 +9,7 @@ import EmployeeStateReducer from "./EmployeeStateSlice";
 import ApplicationStateReducer from './ApplicationStateSlice';
 import SalaryReducer from './SalaryStateSlice';
 import { applicationApi } from "./ApplicationSlice";
+import { userApi } from "./UserSlice";
 const store = configureStore({
   reducer: {
     auth: authReducer,
@@ -19,9 +20,10 @@ const store = configureStore({
     [applicationApi.reducerPath]: applicationApi.reducer,
     applicationState: ApplicationStateReducer,
     salaryState: SalaryReducer,
+    [userApi.reducerPath]: userApi.reducer
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(applicationApi.middleware).concat(profileApi.middleware).concat(employeeApi.middleware);
+    return getDefaultMiddleware().concat(applicationApi.middleware).concat(profileApi.middleware).concat(employeeApi.middleware).concat(userApi.middleware);
   },
 });
 
