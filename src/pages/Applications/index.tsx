@@ -1,7 +1,5 @@
-import Lottie from "lottie-react";
 import { RootState } from "../../store/Store";
 import { useSelector } from "react-redux";
-import celebrationAnimation from "@/assets/animations/celebration-red.json";
 import {
   useGetApplicationByOrgQuery,
   useGetApplicationBySupervisorQuery,
@@ -65,9 +63,6 @@ function ApplicationsPage() {
               </div>
             )}
           </div>
-          {/* <div className="w-full flex">
-            {JSON.stringify(data.data, null, 2)}
-          </div> */}
           {authState.user.role === "ADMIN" ? (
             <>
               <ScrollArea className="h-[90vh]">

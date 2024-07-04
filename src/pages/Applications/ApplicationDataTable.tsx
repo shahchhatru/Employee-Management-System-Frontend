@@ -73,7 +73,7 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
       id: "actions",
       header: "Actions",
       cell: ({ row }) => (
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 bg-custom-primaryBackground">
           <ApplicationDetailModel applicationDetails={row.original} />
           <TooltipProvider>
             <Tooltip>

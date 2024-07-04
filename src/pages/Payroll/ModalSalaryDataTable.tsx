@@ -124,7 +124,7 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
   ];
 
   const table = useReactTable({
-    data: data ? data.data : [],
+    data: data ? data?.data : [],
     columns: salaryColumns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
