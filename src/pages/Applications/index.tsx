@@ -52,7 +52,7 @@ function ApplicationsPage() {
   return (
     <>
       {authState.user.role === "ADMIN" ? (
-        <div className="w-full border-red-400 border-4 min-h-[90vh] flex flex-col">
+        <div className="w-full  min-h-[90vh] flex flex-col">
           <div className="w-full flex">
             {authState.user.role !== "ADMIN" && (
               <div className="w-2/5 h-full flex justify-center items-center mt-4">
