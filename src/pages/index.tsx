@@ -9,6 +9,7 @@ import ProfilePage from "./Profile/index";
 import AnalyticsPage from "./Analytics";
 import ApplicationsPage from "./Applications";
 import SettingsPage from "./Settings";
+import Attendence from "./Attendence";
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   AnalyticsPage,
   ApplicationsPage,
   SettingsPage,
+  Attendence,
 };

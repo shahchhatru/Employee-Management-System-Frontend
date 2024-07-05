@@ -63,11 +63,11 @@ const Sidebar = () => {
           </Link>
           {/* Add more buttons as needed */}
           <Link
-            to="/analytics"
+            to="/attendence"
             className="flex items-center gap-2 p-4 my-2 hover:bg-custom-mainColor/60 rounded"
           >
             <LineChart className="h-5 w-5 mr-2" />
-            <span>Analytics</span>
+            <span>Attendence</span>
           </Link>
           <Link
             to="/payroll"

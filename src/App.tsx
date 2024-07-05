@@ -8,7 +8,6 @@ import {
   PayrollPage,
   Dashboard,
   LoginBox,
-  AnalyticsPage,
   ApplicationsPage,
   ProfilePage,
   SettingsPage,
@@ -16,6 +15,7 @@ import {
 import ResetEmailComponent from "./pages/Auth/ResetEmail";
 import EmailSent from "./pages/Auth/EmailSent";
 import ResetPasswordComponent from "./pages/Auth/ResetPassword";
+import Attendence from "./pages/Attendence";
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
               <Route path="/" Component={Dashboard} />
               <Route path="/employee" Component={EmployeePage} />
               <Route path="/payroll" Component={PayrollPage} />
-              <Route path="/analytics" Component={AnalyticsPage} />
+              <Route path="/attendence" Component={Attendence} />
               <Route path="/application" Component={ApplicationsPage} />
               <Route path="/profile" Component={ProfilePage} />
               <Route path="/settings" Component={SettingsPage} />

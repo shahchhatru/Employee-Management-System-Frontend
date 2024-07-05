@@ -37,9 +37,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Card, CardContent, Checkbox } from "@/components/ui";
+import { Card, CardContent } from "@/components/ui";
 import { useGetSalariesQuery } from "@/store/SalarySlice";
-import { Salary, SalaryResponse } from "../../types/salary";
+import { Salary } from "../../types/salary";
 
 interface SalaryDataTableViewProps {
   month?: string;
