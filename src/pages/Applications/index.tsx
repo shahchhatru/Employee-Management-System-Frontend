@@ -22,12 +22,15 @@ function ApplicationsPage() {
     isLoading: userapplicationisLoading,
     isError: userapplicationisError,
   } = useGetApplicationByUserQuery(authState.user._id);
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
-  if (isError) {
-    return <div>Error</div>;
+  if (authState.user.role === "ADMIN") {
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    if (isError) {
+      return <div>Error</div>;
+    }
   }
 
   if (authState.user.role === "SUPERVISOR") {
@@ -97,9 +100,43 @@ function ApplicationsPage() {
           )}
         </div>
       ) : authState.user.role === "SUPERVISOR" ? (
-        <div>This is supervisor panel view</div>
+        <div className="w-full  min-h-[90vh] flex flex-col">
+          <div className="w-full flex flex-col gap-4">
+            <div className="w-fulls h-full flex justify-end items-center mt-4">
+              <AddApplicationForm
+                update={false}
+                className="p-4 rounded bg-custom-mainColor text-custom-cardTagText "
+              />
+            </div>
+            <ScrollArea className="h-[78vh]">
+              <div className="ml-4 capitalize text-custom-headingText">
+                Application where you are supervisor
+              </div>
+              <ApplicationTable data={supervisordata?.data || []} />
+              <div className="ml-4 capitalize text-custom-headingText">
+                Your applications
+              </div>
+              <ApplicationTable data={userapplicationdata?.data || []} />
+            </ScrollArea>
+          </div>
+        </div>
       ) : (
-        <div>This is user panel view</div>
+        <div className="w-full  min-h-[90vh] flex flex-col">
+          <div className="w-full flex flex-col gap-4">
+            <div className="w-fulls h-full flex justify-end items-center mt-4">
+              <AddApplicationForm
+                update={false}
+                className="p-4 rounded bg-custom-mainColor text-custom-cardTagText "
+              />
+            </div>
+            <ScrollArea className="h-[78vh]">
+              <div className="ml-4 capitalize text-custom-headingText">
+                Your applications
+              </div>
+              <ApplicationTable data={userapplicationdata?.data || []} />
+            </ScrollArea>
+          </div>
+        </div>
       )}
     </>
   );
