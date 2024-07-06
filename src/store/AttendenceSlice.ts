@@ -21,16 +21,20 @@ export const attendenceApi = createApi({
   }),
   tagTypes: ["Attendence"],
   endpoints: (builder) => ({
-    getAttendence: builder.query<AttendenceResponse, void>({
-      query: () => `attendence`,
+    getAdminAttendence: builder.query<AttendenceResponse, void>({
+      query: () => `attendence/adminAttendenceToken`,
       providesTags: ["Attendence"],
     }),
-    checkAttendence: builder.mutation<AttendenceResponse, string>({
-      query: (date) => ({
-        url: `attendence/check/${date}`,
+    checkAttendence: builder.mutation<AttendenceResponse, Partial<Attendence>>({
+      query: (attendence) => ({
+        url: `attendence/check/`,
         method: "POST",
+        body: { ...attendence },
       }),
       invalidatesTags: ["Attendence"],
     }),
   }),
 });
+
+export const { useGetAdminAttendenceQuery, useCheckAttendenceMutation } =
+  attendenceApi;

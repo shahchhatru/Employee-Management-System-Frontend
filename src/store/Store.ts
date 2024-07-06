@@ -11,11 +11,14 @@ import { applicationApi } from "./ApplicationSlice";
 import { userApi } from "./UserSlice";
 import { bonusApi } from "./BonusSlice";
 import { salaryApi } from "./SalarySlice";
+import { attendenceApi } from "./AttendenceSlice";
+import QRcodeReducer from "./QRcodeSlice";
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
     updateProfile: UpdateProfileReducer,
+    qrCodeReducer: QRcodeReducer,
     [profileApi.reducerPath]: profileApi.reducer,
     [employeeApi.reducerPath]: employeeApi.reducer,
     employeeState: EmployeeStateReducer,
@@ -25,6 +28,7 @@ const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [bonusApi.reducerPath]: bonusApi.reducer,
     [salaryApi.reducerPath]: salaryApi.reducer,
+    [attendenceApi.reducerPath]: attendenceApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
@@ -33,7 +37,8 @@ const store = configureStore({
       .concat(employeeApi.middleware)
       .concat(userApi.middleware)
       .concat(bonusApi.middleware)
-      .concat(salaryApi.middleware);
+      .concat(salaryApi.middleware)
+      .concat(attendenceApi.middleware);
   },
 });
 

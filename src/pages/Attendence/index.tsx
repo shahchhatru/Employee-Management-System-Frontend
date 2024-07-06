@@ -1,10 +1,18 @@
-import { AppDispatch, RootState } from "@/store/Store";
-import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store/Store";
+import { useSelector } from "react-redux";
+import AdminView from "./QRBoard";
+import QrCodeScanner from "./QRcodeScanner";
+
 const Attendence = () => {
   const authState = useSelector((state: RootState) => state.auth);
+
   if (authState.user.role === "ADMIN") {
-    return <div> Admin Attendence</div>;
+    return (
+      <div className="w-full">
+        <AdminView />
+      </div>
+    );
   }
-  return <div>Attendence</div>;
+  return <QrCodeScanner />;
 };
 export default Attendence;
