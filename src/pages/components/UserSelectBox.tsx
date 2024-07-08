@@ -14,12 +14,14 @@ interface UserSelectProps {
   defaultValue?: string;
   onChange: (value: string) => void;
   className?: string;
+  placeholder?: string;
 }
 
 const UserSelect: React.FC<UserSelectProps> = ({
   defaultValue,
   onChange,
   className,
+  placeholder,
 }) => {
   const { data, error, isLoading } = useGetAllUsersQuery();
   const [selectedUser, setSelectedUser] = React.useState<string | undefined>(
@@ -49,7 +51,7 @@ const UserSelect: React.FC<UserSelectProps> = ({
       defaultValue={defaultValue}
     >
       <SelectTrigger className={`min-w-[180px] ${className}`}>
-        <SelectValue placeholder="Select a user" />
+        <SelectValue placeholder={placeholder ? placeholder : "Select User"} />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

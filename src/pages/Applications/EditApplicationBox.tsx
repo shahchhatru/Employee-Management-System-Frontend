@@ -21,6 +21,7 @@ import {
 } from "@/store/ApplicationStateSlice";
 import { toast } from "sonner";
 import SelectBox from "./SelectBox";
+import UserSelect from "../components/UserSelectBox";
 
 export interface ApplicationInputProps {
   id?: string;
@@ -92,12 +93,21 @@ const AddApplicationForm = ({
               onChange={(e) => dispatch(setText(e.target.value))}
             />
           </span>
+          {/*  LEAVE = 'LEAVE',
+    TASK = 'TASK',
+    URGENT = 'URGENT',
+    OTHER = 'OTHER',
+    RESIGNATION = 'RESIGNATION',
+ */}
           <span className="flex flex-col w-full">
             <label htmlFor="type">Type</label>
             <SelectBox
               options={[
-                { value: "type1", label: "Type 1" },
-                { value: "type2", label: "Type 2" },
+                { value: "LEAVE", label: "LEAVE" },
+                { value: "TASK ", label: "TASK" },
+                { value: "URGENT", label: "URGENT" },
+                { value: "RESIGNATION", label: "RESIGNATION" },
+                { value: "OTHER", label: "OTHER" },
               ]}
               value={applicationState.type}
               onChange={(value) => dispatch(setType(value))}
@@ -106,12 +116,8 @@ const AddApplicationForm = ({
           </span>
           <span className="flex flex-col w-full">
             <label htmlFor="supervisor">Supervisor</label>
-            <SelectBox
-              options={[
-                { value: "supervisor1", label: "Supervisor 1" },
-                { value: "supervisor2", label: "Supervisor 2" },
-              ]}
-              value={applicationState.supervisor}
+            <UserSelect
+              defaultValue={applicationState.supervisor}
               onChange={(value) => dispatch(setSupervisor(value))}
               placeholder="Select supervisor"
             />

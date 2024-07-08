@@ -2,6 +2,7 @@ import { RootState } from "@/store/Store";
 import { useSelector } from "react-redux";
 import AdminView from "./QRBoard";
 import QrCodeScanner from "./QRcodeScanner";
+import { Link } from "react-router-dom";
 
 const Attendence = () => {
   const authState = useSelector((state: RootState) => state.auth);
@@ -9,10 +10,31 @@ const Attendence = () => {
   if (authState.user.role === "ADMIN") {
     return (
       <div className="w-full">
+        <div className="w-full ">
+          <Link
+            to="/"
+            className="p-4 bg-custom-mainColor text-custom-cardTagText rounded"
+          >
+            Home
+          </Link>
+        </div>
         <AdminView />
       </div>
     );
+  } else {
+    return (
+      <div className="w-full">
+        <div className="w-full ">
+          <Link
+            to="/"
+            className="p-4 bg-custom-mainColor text-custom-cardTagText rounded"
+          >
+            Home
+          </Link>
+        </div>
+        <QrCodeScanner />
+      </div>
+    );
   }
-  return <QrCodeScanner />;
 };
 export default Attendence;

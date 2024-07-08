@@ -8,6 +8,7 @@ import {
 import ApplicationTable from "./ApplicationDataTable";
 import AddApplicationForm from "./EditApplicationBox";
 import { ScrollArea } from "@/components/ui";
+import { Link } from "react-router-dom";
 
 function ApplicationsPage() {
   const authState = useSelector((state: RootState) => state.auth);
@@ -56,7 +57,10 @@ function ApplicationsPage() {
     <>
       {authState.user.role === "ADMIN" ? (
         <div className="w-full  min-h-[90vh] flex flex-col">
-          <div className="w-full flex">
+          <div className="w-full flex flex-row justify-between">
+            <div className="w-3/5 ">
+              <Link to="/home">Home</Link>
+            </div>
             {authState.user.role !== "ADMIN" && (
               <div className="w-2/5 h-full flex justify-center items-center mt-4">
                 <AddApplicationForm
@@ -102,6 +106,14 @@ function ApplicationsPage() {
       ) : authState.user.role === "SUPERVISOR" ? (
         <div className="w-full  min-h-[90vh] flex flex-col">
           <div className="w-full flex flex-col gap-4">
+            <div className="w-3/5 flex items-center justify-start h-full">
+              <Link
+                to="/"
+                className="p-4 bg-custom-mainColor text-custom-cardTagText rounded"
+              >
+                Home
+              </Link>
+            </div>
             <div className="w-fulls h-full flex justify-end items-center mt-4">
               <AddApplicationForm
                 update={false}
