@@ -27,7 +27,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="w-full h-[90vh] border-red-400 border-8 grid grid-cols-12 grid-rows-12">
+    <div className="w-full h-[90vh] grid grid-cols-12 grid-rows-12">
       <div className="col-span-4 bg-custom-secondaryBackground row-span-6 p-4">
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <h2 className="text-xl font-bold">Change Password</h2>

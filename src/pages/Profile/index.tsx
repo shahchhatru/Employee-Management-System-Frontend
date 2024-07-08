@@ -27,7 +27,7 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="w-full bg-custom-primaryBackground border-red-400 border-2 grid grid-cols-12 grid-rows-12 max-h-[95vh] gap-2">
+    <div className="w-full bg-custom-primaryBackground grid grid-cols-12 grid-rows-12 max-h-[95vh] gap-2">
       <div className="col-span-4 row-span-4 bg-custom-secondaryBackground grid grid-cols-12 grid-rows-12">
         <div className="col-start-1 col-end-6 row-start-1 row-end-9 cursor-pointer">
           <img src="src/assets/images/dummyprofile.png" alt="profile" />
