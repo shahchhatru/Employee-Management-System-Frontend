@@ -42,8 +42,9 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [filterField, setFilterField] = useState<string>("text");
   const [filterValue, setFilterValue] = useState<string>("");
-  const [updateApplication, { isLoading, isError }] =
+  const [updateApplication, { isLoading, isError, data: updateData }] =
     useUpdateApplicationMutation();
+  // console.log({ data });
 
   const columns: ColumnDef<ApplicationTypeReturn>[] = [
     {
@@ -57,7 +58,7 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
     {
       accessorKey: "user",
       header: "User",
-      cell: ({ row }) => row.original.user?.name || "N/A",
+      cell: ({ row }) => row.original.user?.name || "Myself",
     },
 
     {
@@ -81,19 +82,26 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => {
+                  onClick={async () => {
                     // Handle edit button click
                     while (isLoading);
-                    updateApplication({
+                    console.log("row.original._id", row.original._id);
+                    await updateApplication({
                       id: row.original._id,
                       applicationData: {
                         status: "APPROVED",
                       },
-                    });
+                    }).unwrap();
                     if (!isError) {
-                      toast.success("Application Approved Successfully");
+                      toast.success(
+                        "Application Approved Successfully" +
+                          JSON.stringify(updateData)
+                      );
                     } else {
-                      toast.error("Failed to Approve Applications");
+                      toast.error(
+                        "Failed to Approve Applications" +
+                          JSON.stringify(updateData)
+                      );
                     }
                   }}
                 >
@@ -111,19 +119,26 @@ function ApplicationTable({ data }: { data: ApplicationTypeReturn[] }) {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => {
+                  onClick={async () => {
                     // Handle edit button click
                     while (isLoading);
-                    updateApplication({
+                    console.log("row.original._id", row.original._id);
+                    await updateApplication({
                       id: row.original._id,
                       applicationData: {
                         status: "REJECTED",
                       },
-                    });
+                    }).unwrap();
                     if (!isError) {
-                      toast.success("Application Rejected Successfully");
+                      toast.success(
+                        "Application Approved Successfully" +
+                          JSON.stringify(updateData)
+                      );
                     } else {
-                      toast.error("Failed to Reject Applications");
+                      toast.error(
+                        "Failed to Approve Applications" +
+                          JSON.stringify(updateData)
+                      );
                     }
                   }}
                 >

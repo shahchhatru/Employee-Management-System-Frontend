@@ -117,6 +117,7 @@ function ApplicationsPage() {
             <div className="w-fulls h-full flex justify-end items-center mt-4">
               <AddApplicationForm
                 update={false}
+                id={authState.user._id}
                 className="p-4 rounded bg-custom-mainColor text-custom-cardTagText "
               />
             </div>
@@ -138,6 +139,7 @@ function ApplicationsPage() {
             <div className="w-fulls h-full flex justify-end items-center mt-4">
               <AddApplicationForm
                 update={false}
+                id={authState.user._id}
                 className="p-4 rounded bg-custom-mainColor text-custom-cardTagText "
               />
             </div>

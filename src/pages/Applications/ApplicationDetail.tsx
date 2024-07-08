@@ -6,7 +6,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { ApplicationTypeReturn } from "@/types/application";
 import { useState } from "react";
 import { Eye, User } from "lucide-react";
@@ -14,18 +13,18 @@ import { Button } from "@/components/ui/button";
 import { useDeleteApplicationMutation } from "@/store/ApplicationSlice";
 import { toast } from "sonner";
 import AddApplicationForm from "./EditApplicationBox";
-interface applicationDetailsModelPorps {
+
+interface ApplicationDetailsModelProps {
   applicationDetails?: ApplicationTypeReturn;
 }
 
 const ApplicationDetailModel = ({
   applicationDetails,
-}: applicationDetailsModelPorps) => {
+}: ApplicationDetailsModelProps) => {
   const [isOpenDetails, setIsOpenDetails] = useState(false);
-  const [
-    deleteApplication,
-    { isLoading: isDeleteLoading, isError: isDeleteError, data },
-  ] = useDeleteApplicationMutation();
+  const [deleteApplication, { isLoading: isDeleteLoading }] =
+    useDeleteApplicationMutation();
+
   const handleOpenDetails = () => {
     setIsOpenDetails(true);
   };
@@ -33,6 +32,17 @@ const ApplicationDetailModel = ({
   const handleCloseDetails = () => {
     setIsOpenDetails(false);
   };
+
+  const handleDelete = async () => {
+    try {
+      await deleteApplication({ id: applicationDetails._id }).unwrap();
+      toast.success("Application deleted successfully");
+      setIsOpenDetails(false);
+    } catch (error) {
+      toast.error(`Failed to delete application: ${JSON.stringify(error)}`);
+    }
+  };
+
   return (
     <div>
       <Dialog open={isOpenDetails} onOpenChange={setIsOpenDetails}>
@@ -54,14 +64,14 @@ const ApplicationDetailModel = ({
               </h2>
             </div>
             <div className="mb-2 flex items-center">
-              <p className=" text-custom-cardTagText bg-custom-mainColor rounded px-4 py-2">
+              <p className="text-custom-cardTagText bg-custom-mainColor rounded px-4 py-2">
                 {applicationDetails?.user.role}
               </p>
             </div>
             <div className="flex flex-col">
               <div className="mb-2 flex items-center gap-4">
                 <span className="capitalize">Type:</span>
-                <span>{applicationDetails.type}</span>
+                <span>{applicationDetails?.type}</span>
               </div>
               <p className="bg-custom-cardBackground rounded px-4 py-2">
                 {applicationDetails?.text}
@@ -69,34 +79,23 @@ const ApplicationDetailModel = ({
               <div className="flex w-full justify-end">
                 <AddApplicationForm
                   update={true}
-                  type={applicationDetails.type}
-                  id={applicationDetails._id}
-                  text={applicationDetails.text}
-                  supervisor={applicationDetails.supervisor._id}
-                  className="p-4 rounded bg-custom-mainColor text-custom-cardTagText "
+                  type={applicationDetails?.type}
+                  id={applicationDetails?._id}
+                  text={applicationDetails?.text}
+                  supervisor={applicationDetails?.supervisor._id}
+                  className="p-4 rounded bg-custom-mainColor text-custom-cardTagText"
                 />
               </div>
             </div>
-
-            {/* Add more details as needed */}
           </div>
           <DialogFooter>
             <Button onClick={handleCloseDetails}>Close</Button>
-
             <Button
-              onClick={() => {
-                while (isDeleteLoading);
-                deleteApplication({ id: applicationDetails?._id });
-                setIsOpenDetails(false);
-                if (isDeleteError) {
-                  toast.error(`somewhting went wrong ${data.message}`);
-                } else {
-                  toast.success("Application deleted successfully");
-                }
-              }}
+              onClick={handleDelete}
               variant="destructive"
+              disabled={isDeleteLoading}
             >
-              Delete
+              {isDeleteLoading ? "Deleting..." : "Delete"}
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -104,4 +103,5 @@ const ApplicationDetailModel = ({
     </div>
   );
 };
+
 export default ApplicationDetailModel;
