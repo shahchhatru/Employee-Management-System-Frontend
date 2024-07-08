@@ -7,11 +7,14 @@ import {
   AlertDescription,
   AlertTitle,
 } from "@/components/ui";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/Store";
 import { HandCoins, Terminal } from "lucide-react";
+import { Link } from "react-router-dom";
 
-function HelloCard({ name }: { name: string }) {
+function HelloCard({ name, className }: { name: string; className?: string }) {
   return (
-    <div className="col-span-3 row-span-4 bg-custom-secondaryBackground rounded p-4 flex">
+    <div className={className}>
       <div className="flex flex-col">
         <h1 className="text-custom-headingText">Hello</h1>
         <div className=" flex items-center  mt-4 p-2 text-custom-primaryText">
@@ -174,15 +177,53 @@ function PayRollExpenseBox() {
 }
 
 function Dashboard() {
-  return (
+  const authState = useSelector((state: RootState) => state.auth);
+  return authState.user.role === "ADMIN" ? (
     <div className="w-full min-h-[90vh] h-full grid grid-cols-12 grid-rows-12 gap-4">
-      <HelloCard name="Admin" />
+      <HelloCard
+        name="Admin"
+        className="col-span-3 row-span-4 bg-custom-secondaryBackground rounded p-4 flex"
+      />
       <EmployeeCard />
       <LeaveRequests />
       <PayHikeRequests />
       <RecentActivities />
       <PayRollExpenseBox />
     </div>
+  ) : (
+    <div className="w-full min-h-[90vh] h-full grid grid-cols-12 grid-rows-12 gap-4">
+      <HelloCard
+        name={authState.user.name}
+        className="col-span-12 md:col-span-6   row-span-4 bg-custom-secondaryBackground rounded p-4 flex"
+      />
+      <div className="col-span-12 md:col-span-6  row-span-4 bg-custom-secondaryBackground rounded p-4 flex gap-2 justify-center items-center">
+        <Link
+          to="/attendence"
+          className="p-4 bg-custom-mainColor h-16 flex items-center justify-center text-custom-cardTagText rounded"
+        >
+          Attendence
+        </Link>
+        <Link
+          to="/application"
+          className="p-4 bg-custom-mainColor h-16 flex items-center justify-center text-custom-cardTagText rounded"
+        >
+          Applications
+        </Link>
+        <Link
+          to="/payroll"
+          className="p-4 bg-custom-mainColor h-16 flex items-center justify-center text-custom-cardTagText rounded"
+        >
+          Payroll
+        </Link>
+        <Link
+          to="/profile"
+          className="p-4 bg-custom-mainColor h-16 flex items-center justify-center text-custom-cardTagText rounded"
+        >
+          Profile
+        </Link>
+      </div>
+    </div>
   );
 }
+
 export default Dashboard;
