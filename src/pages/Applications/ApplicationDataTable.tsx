@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   ColumnDef,
   SortingState,
@@ -10,7 +10,7 @@ import {
 } from "@tanstack/react-table";
 import { ApplicationTypeReturn } from "@/types/application";
 import { Button } from "@/components/ui/button";
-import { Edit2, UserRoundX, CheckCheck } from "lucide-react";
+import { UserRoundX, CheckCheck } from "lucide-react";
 import {
   Table,
   TableBody,
