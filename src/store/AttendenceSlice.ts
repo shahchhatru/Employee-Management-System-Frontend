@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { AttendenceResponse, Attendence } from "../types/attendence";
+import type {
+  AttendenceResponse,
+  Attendence,
+  UserAttendenceResponse,
+} from "../types/attendence";
 
 import { API_BASE_URL } from "@/constants";
 import { RootState } from "./Store";
@@ -33,8 +37,17 @@ export const attendenceApi = createApi({
       }),
       invalidatesTags: ["Attendence"],
     }),
+
+    // Add other queries here
+    getMyAttendence: builder.query<UserAttendenceResponse, void>({
+      query: (id) => `attendence/myAttendence/`,
+      providesTags: ["Attendence"],
+    }),
   }),
 });
 
-export const { useGetAdminAttendenceQuery, useCheckAttendenceMutation } =
-  attendenceApi;
+export const {
+  useGetAdminAttendenceQuery,
+  useCheckAttendenceMutation,
+  useGetMyAttendenceQuery,
+} = attendenceApi;
