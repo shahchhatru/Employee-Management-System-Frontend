@@ -4,6 +4,7 @@ import SalaryDetailModel from "./SearchSalary";
 import { RootState } from "@/store/Store";
 import { useSelector } from "react-redux";
 import SalaryDataTableView from "./ModalSalaryDataTable";
+import { Link } from "react-router-dom";
 
 const PayrollComponent = () => {
   const authState = useSelector((state: RootState) => state.auth);
@@ -42,7 +43,15 @@ const PayrollComponent = () => {
       </ScrollArea>
     </div>
   ) : (
-    <div className="w-full h-[90vh] ">
+    <div className="w-full h-[90vh] flex flex-col gap-8 ">
+      <div className="w-full">
+        <Link
+          to="/"
+          className="p-4 bg-custom-mainColor text-custom-cardTagText rounded"
+        >
+          Home
+        </Link>
+      </div>
       <SalaryDataTableView user={authState.user._id} />
     </div>
   );
