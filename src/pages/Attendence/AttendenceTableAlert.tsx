@@ -16,7 +16,7 @@ const AttendenceTableAlert = () => {
     <div>
       <AlertDialog>
         <AlertDialogTrigger>Show Attendence</AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent className="min-w-fit ">
           <AlertDialogHeader>
             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
             <AlertDialogDescription>
