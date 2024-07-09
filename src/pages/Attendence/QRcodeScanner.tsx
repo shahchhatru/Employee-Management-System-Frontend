@@ -3,17 +3,27 @@ import { useCheckAttendenceMutation } from "@/store/AttendenceSlice";
 import { useDispatch } from "react-redux";
 import { setQrCode } from "@/store/QRcodeSlice";
 import QrScanner from "react-qr-scanner";
+import { toast } from "sonner";
 
 const QrCodeScanner = () => {
   const [scanResult, setScanResult] = useState(null);
-  const [checkAttendence] = useCheckAttendenceMutation();
+  const [checkAttendence, { isError, isSuccess, data: response }] =
+    useCheckAttendenceMutation();
   const dispatch = useDispatch();
 
   const handleScan = (data: any) => {
     if (data) {
-      setScanResult(data);
-      dispatch(setQrCode(data));
-      checkAttendence({ token: data, status: "PRESENT" });
+      console.log({ data });
+      setScanResult(data?.text);
+      dispatch(setQrCode(data?.text));
+      checkAttendence({ token: data.text, status: "PRESENT" });
+      if (isError) {
+        toast.error("Something went wrong" + JSON.stringify(response));
+      } else if (isSuccess) {
+        toast.success(
+          "Attendence checked successfully" + JSON.stringify(response)
+        );
+      }
     }
   };
 

@@ -16,7 +16,9 @@ import { Card, CardContent } from "@/components/ui";
 import { useGetEmployeeQuery } from "../../store/EmployeeSlice";
 import { Employee } from "../../types/employee";
 import BonusActionTooltip from "./ActionTooltip";
-
+import { RootState } from "@/store/Store";
+import { useSelector } from "react-redux";
+import { useGetSalariesByUserQuery } from "../../store/SalarySlice";
 function SalaryDataTable() {
   const { data, isLoading, error } = useGetEmployeeQuery();
 

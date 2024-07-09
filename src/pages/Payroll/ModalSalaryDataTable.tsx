@@ -40,7 +40,9 @@ import {
 import { Card, CardContent } from "@/components/ui";
 import { useGetSalariesQuery } from "@/store/SalarySlice";
 import { Salary } from "../../types/salary";
-
+import { useSelector } from "react-redux";
+import { useGetSalariesByUserQuery } from "../../store/SalarySlice";
+import { RootState } from "@/store/Store";
 interface SalaryDataTableViewProps {
   month?: string;
   year?: string;
@@ -48,7 +50,13 @@ interface SalaryDataTableViewProps {
 }
 function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
   const { data, isLoading, error } = useGetSalariesQuery({ user, month, year });
+  const authState = useSelector((state: RootState) => state.auth);
 
+  const {
+    data: userdata,
+    isLoading: isUserLoading,
+    error: isErrorLoading,
+  } = useGetSalariesByUserQuery(authState.user._id);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -124,7 +132,12 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
   ];
 
   const table = useReactTable({
-    data: data ? data?.data : [],
+    data:
+      authState.user.role === "ADMIN"
+        ? data
+          ? data?.data
+          : []
+        : userdata?.data || [],
     columns: salaryColumns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -144,23 +157,40 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
     },
   });
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (authState.user.role === "ADMIN") {
+    if (isLoading) {
+      return <div>Loading...</div>;
+    }
+
+    if (error) {
+      return (
+        <div>
+          Error: {error instanceof Error ? error.message : "Unknown error"}
+          {JSON.stringify(error)}
+          {JSON.stringify({ year, month, user })}
+        </div>
+      );
+    }
+
+    console.log({ data });
+
+    if (!data) return <div>{JSON.stringify(data)}</div>;
+  } else {
+    if (isUserLoading) {
+      return <div>Loading...</div>;
+    }
+    if (isErrorLoading) {
+      return (
+        <div>
+          Error: {error instanceof Error ? error.message : "Unknown error"}
+          {JSON.stringify(error)}
+          {JSON.stringify({ year, month, user })}
+        </div>
+      );
+    }
+
+    if (!userdata) return <div>{JSON.stringify(userdata)}</div>;
   }
-
-  if (error) {
-    return (
-      <div>
-        Error: {error instanceof Error ? error.message : "Unknown error"}
-        {JSON.stringify(error)}
-        {JSON.stringify({ year, month, user })}
-      </div>
-    );
-  }
-
-  console.log({ data });
-
-  if (!data) return <div>{JSON.stringify(data)}</div>;
 
   return (
     <Card>
