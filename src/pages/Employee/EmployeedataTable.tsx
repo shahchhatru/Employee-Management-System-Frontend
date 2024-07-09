@@ -80,7 +80,7 @@ function DataTableView() {
         <Checkbox
           checked={
             table.getIsAllPageRowsSelected() ||
-            (table.getIsSomePageRowsSelected() && "indeterminate") ===
+              (table.getIsSomePageRowsSelected() && "indeterminate") ===
               "indeterminate"
               ? "indeterminate"
               : table.getIsSomePageRowsSelected()
@@ -286,9 +286,9 @@ function DataTableView() {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                       </TableHead>
                     ))}
                   </TableRow>

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { changepassword } from "@/store/AuthSlice"; // Adjust the import path as needed
-import { AppDispatch, RootState } from "@/store/Store"; // Adjust the import path as needed
+import { AppDispatch, } from "@/store/Store"; // Adjust the import path as needed
 import { Button, Input } from "@/components/ui";
 import { Label } from "@/components/ui/label";
 
 const SettingsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const userId = useSelector((state: RootState) => state.auth.user?._id);
+  // const userId = useSelector((state: RootState) => state.auth.user?._id);
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
