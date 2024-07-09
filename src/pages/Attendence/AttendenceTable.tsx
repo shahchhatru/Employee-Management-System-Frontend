@@ -1,5 +1,4 @@
 // components/AttendanceTable.tsx
-"use client";
 
 import * as React from "react";
 import {
@@ -89,13 +88,13 @@ export const columns: ColumnDef<UserAttendence>[] = [
       );
     },
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("user.email")}</div>
+      <div className="lowercase">{row.original.user.email}</div>
     ),
   },
   {
     accessorKey: "user.name",
     header: "Name",
-    cell: ({ row }) => <div>{row.getValue("user.name")}</div>,
+    cell: ({ row }) => <div>{row.original.user.name}</div>,
   },
   {
     id: "actions",
@@ -114,7 +113,7 @@ export const columns: ColumnDef<UserAttendence>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(attendance.id)}
+              onClick={() => navigator.clipboard.writeText(attendance._id)}
             >
               Copy attendance ID
             </DropdownMenuItem>

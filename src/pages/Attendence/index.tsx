@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import AdminView from "./QRBoard";
 import QrCodeScanner from "./QRcodeScanner";
 import { Link } from "react-router-dom";
-
+import AttendenceTableAlert from "./AttendenceTableAlert";
 const Attendence = () => {
   const authState = useSelector((state: RootState) => state.auth);
 
@@ -24,13 +24,14 @@ const Attendence = () => {
   } else {
     return (
       <div className="w-full">
-        <div className="w-full ">
+        <div className="w-full flex justify-between">
           <Link
             to="/"
             className="p-4 bg-custom-mainColor text-custom-cardTagText rounded"
           >
             Home
           </Link>
+          <AttendenceTableAlert />
         </div>
         <QrCodeScanner />
       </div>
