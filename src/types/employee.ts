@@ -1,4 +1,4 @@
-import { Salary } from "./salary";
+
 
 export interface Employee {
   _id?: string;
