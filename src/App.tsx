@@ -46,6 +46,7 @@ function App() {
                 path="resetpassword/:token"
                 Component={ResetPasswordComponent}
               />
+
               <Route path="*" Component={LoginBox} />
             </Route>
           </Routes>

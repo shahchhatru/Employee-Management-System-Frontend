@@ -38,6 +38,8 @@ export const applicationApi = createApi({
       query: (id) => `applications/user/${id}`,
       providesTags: ["Application"],
     }),
+
+
     createApplication: builder.mutation<ApplicationResponse, Application>({
       query: (application) => ({
         url: `applications`,
