@@ -11,6 +11,7 @@ import {
   ApplicationsPage,
   ProfilePage,
   SettingsPage,
+  VerifyTokenBox,
 } from "./pages";
 import ResetEmailComponent from "./pages/Auth/ResetEmail";
 import EmailSent from "./pages/Auth/EmailSent";
@@ -46,7 +47,7 @@ function App() {
                 path="resetpassword/:token"
                 Component={ResetPasswordComponent}
               />
-
+              <Route path="verifyToken/:otp" Component={VerifyTokenBox} />
               <Route path="*" Component={LoginBox} />
             </Route>
           </Routes>

@@ -25,6 +25,7 @@ interface User {
   email: string;
   role: string;
   isVerified: boolean;
+  organization: string;
 }
 
 interface AuthState {

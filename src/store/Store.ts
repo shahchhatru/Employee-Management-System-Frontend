@@ -13,6 +13,7 @@ import { bonusApi } from "./BonusSlice";
 import { salaryApi } from "./SalarySlice";
 import { attendenceApi } from "./AttendenceSlice";
 import QRcodeReducer from "./QRcodeSlice";
+import { organizationApi } from "./OrganizationSlice";
 
 const store = configureStore({
   reducer: {
@@ -29,6 +30,7 @@ const store = configureStore({
     [bonusApi.reducerPath]: bonusApi.reducer,
     [salaryApi.reducerPath]: salaryApi.reducer,
     [attendenceApi.reducerPath]: attendenceApi.reducer,
+    [organizationApi.reducerPath]: organizationApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware()
@@ -38,7 +40,8 @@ const store = configureStore({
       .concat(userApi.middleware)
       .concat(bonusApi.middleware)
       .concat(salaryApi.middleware)
-      .concat(attendenceApi.middleware);
+      .concat(attendenceApi.middleware)
+      .concat(organizationApi.middleware);
   },
 });
 

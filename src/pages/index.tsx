@@ -10,6 +10,7 @@ import AnalyticsPage from "./Analytics";
 import ApplicationsPage from "./Applications";
 import SettingsPage from "./Settings";
 import Attendence from "./Attendence";
+import VerifyTokenBox from "./Auth/VerifyToken";
 
 export {
   Home,
@@ -24,4 +25,5 @@ export {
   ApplicationsPage,
   SettingsPage,
   Attendence,
+  VerifyTokenBox
 };
