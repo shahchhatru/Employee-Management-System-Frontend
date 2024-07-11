@@ -47,7 +47,7 @@ function App() {
                 path="resetpassword/:token"
                 Component={ResetPasswordComponent}
               />
-              <Route path="verifyToken/:otp" Component={VerifyTokenBox} />
+              <Route path="verifyToken" Component={VerifyTokenBox} />
               <Route path="*" Component={LoginBox} />
             </Route>
           </Routes>
