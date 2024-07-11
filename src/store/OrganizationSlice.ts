@@ -33,3 +33,6 @@ export const organizationApi = createApi({
 
 })
 
+
+export const { useVerifyOrganizationMutation } = organizationApi
+
