@@ -50,6 +50,7 @@ function DataTableView() {
   const handleSelectChange = (id: string, isSelected: boolean) => {
     setSelectedIds((prevSelectedIds) => {
       if (isSelected) {
+        console.log(selectedIds, id);
         return [...prevSelectedIds, id];
       } else {
         return prevSelectedIds.filter((selectedId) => selectedId !== id);
