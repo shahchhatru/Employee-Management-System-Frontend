@@ -1,4 +1,11 @@
 import {
+  addMonths,
+  differenceInCalendarDays,
+  format,
+  isBefore,
+  parseISO,
+} from "date-fns";
+import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
@@ -21,19 +28,36 @@ function SalaryDataTable() {
   const { data, isLoading, error } = useGetEmployeeQuery();
 
   const isPaid = (joiningDate: string) => {
-    const joining = new Date(joiningDate);
+    const joining = parseISO(joiningDate);
     const current = new Date();
-    const joiningDay = joining.getDate();
-    const currentDay = current.getDate();
-    // const joiningMonth = joining.getMonth();
-    // const currentMonth = current.getMonth();
 
-    if (joiningDay >= 28 && currentDay >= 28) {
-      return true;
-    } else if (joiningDay <= currentDay) {
-      return true;
+    // Check if the joining date is at least one month old
+    const oneMonthLater = addMonths(joining, 1);
+    if (isBefore(current, oneMonthLater)) {
+      return `No (Less than 1 month since joining)`;
     }
-    return false;
+
+    // Calculate the next payment date
+    let nextPaymentDate = new Date(
+      current.getFullYear(),
+      current.getMonth(),
+      1
+    );
+    if (joining.getDate() >= 28) {
+      nextPaymentDate = new Date(current.getFullYear(), current.getMonth(), 28);
+    }
+
+    // Calculate remaining days if next payment date is in the future
+    const remainingDays = differenceInCalendarDays(nextPaymentDate, current);
+
+    // Determine the month name for which the salary is going to be paid
+    const paymentMonth = format(nextPaymentDate, "MMMM");
+
+    if (nextPaymentDate <= current) {
+      return `Yes (Salary for ${paymentMonth} paid)`;
+    } else {
+      return `No (${remainingDays} days remaining until ${paymentMonth} salary)`;
+    }
   };
 
   const salaryColumns: ColumnDef<Employee>[] = [
@@ -50,7 +74,14 @@ function SalaryDataTable() {
     {
       accessorKey: "paid",
       header: "Paid",
-      cell: ({ row }) => (isPaid(row.original.joiningDate) ? "Yes" : "No"),
+      cell: ({ row }) => isPaid(row.original.joiningDate),
+    },
+    {
+      accessorKey: "joiningDate",
+      header: "Joining Date",
+      cell: ({ row }) => (
+        <span>{format(row.original.joiningDate, "MM/dd/yyyy")}</span>
+      ),
     },
     {
       accessorKey: "bonus",
@@ -63,7 +94,6 @@ function SalaryDataTable() {
         </span>
       ),
     },
-
     {
       accessorKey: "actions",
       header: "Actions",
