@@ -7,6 +7,7 @@ import {
 import { Button } from "@/components/ui";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useVerifyOrganizationMutation } from "@/store/OrganizationSlice";
+import { toast } from "sonner";
 
 interface VerifyProps {
   className?: string;
@@ -15,7 +16,8 @@ interface VerifyProps {
 function VerifyTokenBox({ className }: VerifyProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  const [verifyOrganization] = useVerifyOrganizationMutation();
+  const [verifyOrganization, { isError, isLoading, isSuccess, data }] =
+    useVerifyOrganizationMutation();
 
   // Parse query parameters
   const searchParams = new URLSearchParams(location.search);
@@ -24,12 +26,21 @@ function VerifyTokenBox({ className }: VerifyProps) {
 
   const handleVerify = async () => {
     try {
+      while (isLoading);
       if (!otp) throw new Error("OTP is not defined");
       if (!userId) throw new Error("User ID is not defined");
 
-      const response = await verifyOrganization({ otp, user: userId }).unwrap();
-      window.alert(JSON.stringify(response));
-      navigate("/login");
+      await verifyOrganization({ otp, user: userId });
+      // window.alert(JSON.stringify(data, null, 2));
+
+      if (isSuccess) {
+        toast.success(
+          "OTP verified successfully" + JSON.stringify(data, null, 2)
+        );
+        navigate("auth/login");
+      } else if (isError) {
+        toast.error("Failed to verify OTP" + JSON.stringify(data, null, 2));
+      }
     } catch (error: any) {
       console.error(error);
       window.alert(error.message); // Provide user feedback
