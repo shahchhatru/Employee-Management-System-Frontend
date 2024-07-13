@@ -69,7 +69,7 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
 
   const salaryColumns: ColumnDef<Salary>[] = [
     {
-      accessorKey: "user",
+      accessorKey: "employee                    ",
       header: ({ column }) => (
         <Button
           variant="ghost"
