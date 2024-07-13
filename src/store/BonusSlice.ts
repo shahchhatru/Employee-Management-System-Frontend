@@ -46,6 +46,10 @@ export const bonusApi = createApi({
         method: "POST",
         body: bonusAmount,
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(employeeApi.util.invalidateTags(["Employee"]));
+      },
       invalidatesTags: ["Employee"],
     }),
     getTotalBonusAmount: builder.query<TotalBonusResponse, string>({
@@ -57,6 +61,10 @@ export const bonusApi = createApi({
         url: `employee/bonus/clear/${userId}`,
         method: "GET", // This is a GET request as per your routes, but you might want to change it to POST or DELETE
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        dispatch(employeeApi.util.invalidateTags(["Employee"]));
+      },
       invalidatesTags: ["Employee"],
     }),
   }),
