@@ -43,6 +43,8 @@ import { Salary } from "../../types/salary";
 import { useSelector } from "react-redux";
 import { useGetSalariesByUserQuery } from "../../store/SalarySlice";
 import { RootState } from "@/store/Store";
+import { useGeneratePDFMutation } from "@/store/PDFSlice";
+import { toast } from "sonner";
 interface SalaryDataTableViewProps {
   month?: string;
   year?: string;
@@ -51,7 +53,7 @@ interface SalaryDataTableViewProps {
 function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
   const { data, isLoading, error } = useGetSalariesQuery({ user, month, year });
   const authState = useSelector((state: RootState) => state.auth);
-
+  const [generatePDF, { isSuccess: isPDFSuccess, isError: isPDFError, isLoading: isPDFLoading, }] = useGeneratePDFMutation();
   const {
     data: userdata,
     isLoading: isUserLoading,
@@ -66,6 +68,19 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
     pageIndex: 0,
     pageSize: 10,
   });
+
+  const printpdf = async () => {
+    while (isPDFLoading);
+    await generatePDF({ name: authState.user.name, data: data }).unwrap();
+    if (isPDFError) {
+      toast.error("Error generating PDF");
+    }
+    if (isPDFSuccess) {
+      toast.success("PDF generated successfully");
+    }
+
+  }
+
 
   const salaryColumns: ColumnDef<Salary>[] = [
     {
@@ -255,9 +270,9 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                       </TableHead>
                     ))}
                   </TableRow>
@@ -332,6 +347,9 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
               </Button>
             </div>
           </div>
+        </div>
+        <div className="flex w-full justify-end">
+          <Button onClick={printpdf}>Generate PDF</Button>
         </div>
       </CardContent>
     </Card>
