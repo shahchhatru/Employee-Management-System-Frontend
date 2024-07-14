@@ -85,12 +85,14 @@ function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
     await addSalary({ employee: userId, month: salaryMonth, year: salaryYear });
 
     if (isAddSalaryError) {
+      // setOpen(false);
       toast.error(
         "Error adding salary" + JSON.stringify(addSalaryData, null, 2)
       );
       console.error("Error adding salary:", addSalaryData);
     }
     if (isAddSalarySuccess) {
+      // setOpen(false);
       toast.success(
         "Salary added successfully" + JSON.stringify(addSalaryData, null, 2)
       );
