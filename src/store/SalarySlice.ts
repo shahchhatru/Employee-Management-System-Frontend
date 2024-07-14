@@ -50,6 +50,16 @@ export const salaryApi = createApi({
       },
       providesTags: ["Salary"],
     }),
+
+    // Add other mutation functions here
+    addSalary: builder.mutation<SalaryResponse, Partial<SalaryStateInputs>>({
+      query: (salaryData) => ({
+        url: `salary`,
+        method: "POST",
+        body: salaryData,
+      }),
+      invalidatesTags: ["Salary"],
+    })
   }),
 });
 
@@ -58,4 +68,5 @@ export const {
   useCreateSalaryMutation,
   useGetSalariesByUserQuery,
   useGetSalariesQuery,
+  useAddSalaryMutation
 } = salaryApi;
