@@ -28,7 +28,9 @@ import {
   useClearBonusArrayMutation,
   useGetTotalBonusAmountQuery,
 } from "@/store/BonusSlice";
-
+import { Month } from '../../enums/month.enum';
+import MonthSelect from "../components/MonthSelectBox";
+import YearSelect from "../components/YearSelectBox";
 import { useAddSalaryMutation } from "@/store/SalarySlice";
 
 interface BonusActionTooltipProps {
@@ -43,7 +45,7 @@ function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
   const [isOpenClearBonus, setIsOpenClearBonus] = useState(false);
   const [isOpenAddSalary, setIsOpenAddSalary] = useState(false); // New state for salary dialog
   const [bonusAmount, setBonusAmount] = useState("");
-  const [salaryMonth, setSalaryMonth] = useState("");
+  const [salaryMonth, setSalaryMonth] = useState<Month>();
   const [salaryYear, setSalaryYear] = useState("");
   const [addBonus] = useAddBonusAmountMutation();
   const [removeBonus] = useRemoveBonusAmountMutation();
@@ -164,18 +166,20 @@ function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
               <DialogHeader>
                 <DialogTitle>Add Salary</DialogTitle>
               </DialogHeader>
-              <Input
+              {/* <Input
                 type="text"
                 value={salaryMonth}
                 onChange={(e) => setSalaryMonth(e.target.value)}
                 placeholder="Enter month (e.g., January)"
-              />
-              <Input
+              /> */}
+              <MonthSelect value={salaryMonth} onChange={setSalaryMonth} />
+              {/* <Input
                 type="number"
                 value={salaryYear}
                 onChange={(e) => setSalaryYear(e.target.value)}
                 placeholder="Enter year (e.g., 2024)"
-              />
+              /> */}
+              <YearSelect value={salaryYear} onChange={setSalaryYear} />
               <DialogFooter>
                 <Button onClick={handleAddSalary}>Add Salary</Button>
               </DialogFooter>
