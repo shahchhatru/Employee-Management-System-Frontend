@@ -9,7 +9,8 @@ import {
   PlusCircle,
   MinusCircle,
   DollarSign,
-  Trash2, // Ensure this is correctly imported
+  Trash2,
+  Briefcase, // Ensure this is correctly imported
 } from "lucide-react";
 import {
   Dialog,
@@ -28,17 +29,22 @@ import {
   useGetTotalBonusAmountQuery,
 } from "@/store/BonusSlice";
 
+import { useAddSalaryMutation } from "@/store/SalarySlice";
+
 interface BonusActionTooltipProps {
   userId: string;
 }
 
 function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
   const [open, setOpen] = useState(false);
+  const [addSalary] = useAddSalaryMutation();
   const [isOpenAddBonus, setIsOpenAddBonus] = useState(false);
   const [isOpenRemoveBonus, setIsOpenRemoveBonus] = useState(false);
   const [isOpenClearBonus, setIsOpenClearBonus] = useState(false);
+  const [isOpenAddSalary, setIsOpenAddSalary] = useState(false); // New state for salary dialog
   const [bonusAmount, setBonusAmount] = useState("");
-
+  const [salaryMonth, setSalaryMonth] = useState("");
+  const [salaryYear, setSalaryYear] = useState("");
   const [addBonus] = useAddBonusAmountMutation();
   const [removeBonus] = useRemoveBonusAmountMutation();
   const [clearBonusArray] = useClearBonusArrayMutation();
@@ -61,6 +67,12 @@ function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
     await clearBonusArray(userId);
     setIsOpenClearBonus(false);
     refetchTotalBonus();
+  };
+
+  const handleAddSalary = async () => {
+    await addSalary({ employee: userId, month: salaryMonth, year: salaryYear });
+    setIsOpenAddSalary(false);
+    // You might want to add a refetch for salary data if needed
   };
 
   return (
@@ -139,6 +151,37 @@ function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
               </DialogFooter>
             </DialogContent>
           </Dialog>
+
+          {/* Add Salary Dialog */}
+          <Dialog open={isOpenAddSalary} onOpenChange={setIsOpenAddSalary}>
+            <DialogTrigger
+              className="hover:bg-blue-100 rounded p-2"
+              onClick={() => setIsOpenAddSalary(true)}
+            >
+              <Briefcase className="text-blue-700" />
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Add Salary</DialogTitle>
+              </DialogHeader>
+              <Input
+                type="text"
+                value={salaryMonth}
+                onChange={(e) => setSalaryMonth(e.target.value)}
+                placeholder="Enter month (e.g., January)"
+              />
+              <Input
+                type="number"
+                value={salaryYear}
+                onChange={(e) => setSalaryYear(e.target.value)}
+                placeholder="Enter year (e.g., 2024)"
+              />
+              <DialogFooter>
+                <Button onClick={handleAddSalary}>Add Salary</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
 
           {/* Total Bonus Display */}
           <span className="flex items-center">
