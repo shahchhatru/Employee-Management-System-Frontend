@@ -9,6 +9,7 @@ export interface Salary {
   month: string;
   year: string;
   organization: string;
+  employee?: string;
 }
 
 export interface SalaryStateInputs {
@@ -18,6 +19,7 @@ export interface SalaryStateInputs {
   pf?: number;
   netAmount?: number;
   user?: string;
+
   month?: string;
   year?: string;
   organization?: string;

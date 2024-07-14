@@ -53,7 +53,10 @@ interface SalaryDataTableViewProps {
 function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
   const { data, isLoading, error } = useGetSalariesQuery({ user, month, year });
   const authState = useSelector((state: RootState) => state.auth);
-  const [generatePDF, { isSuccess: isPDFSuccess, isError: isPDFError, isLoading: isPDFLoading, }] = useGeneratePDFMutation();
+  const [
+    generatePDF,
+    { isSuccess: isPDFSuccess, isError: isPDFError, isLoading: isPDFLoading },
+  ] = useGeneratePDFMutation();
   const {
     data: userdata,
     isLoading: isUserLoading,
@@ -63,7 +66,7 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = useState({});
-  const [filterField, setFilterField] = useState("user");
+  const [filterField, setFilterField] = useState("employee");
   const [pagination, setPagination] = useState({
     pageIndex: 0,
     pageSize: 10,
@@ -78,13 +81,11 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
     if (isPDFSuccess) {
       toast.success("PDF generated successfully");
     }
-
-  }
-
+  };
 
   const salaryColumns: ColumnDef<Salary>[] = [
     {
-      accessorKey: "employee                    ",
+      accessorKey: "employee",
       header: ({ column }) => (
         <Button
           variant="ghost"
@@ -270,9 +271,9 @@ function SalaryDataTableView({ month, year, user }: SalaryDataTableViewProps) {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
                       </TableHead>
                     ))}
                   </TableRow>
