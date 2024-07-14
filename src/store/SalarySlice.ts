@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import type { SalaryResponse, SalaryStateInputs } from "../types/salary";
+import type {
+  SalaryInput,
+  SalaryResponse,
+  SalaryStateInputs,
+} from "../types/salary";
 import { API_BASE_URL } from "@/constants";
 import { RootState } from "./Store";
 
@@ -52,14 +56,14 @@ export const salaryApi = createApi({
     }),
 
     // Add other mutation functions here
-    addSalary: builder.mutation<SalaryResponse, Partial<SalaryStateInputs>>({
+    addSalary: builder.mutation<SalaryResponse, SalaryInput>({
       query: (salaryData) => ({
         url: `salary`,
         method: "POST",
-        body: salaryData,
+        body: { ...salaryData },
       }),
       invalidatesTags: ["Salary"],
-    })
+    }),
   }),
 });
 
@@ -68,5 +72,5 @@ export const {
   useCreateSalaryMutation,
   useGetSalariesByUserQuery,
   useGetSalariesQuery,
-  useAddSalaryMutation
+  useAddSalaryMutation,
 } = salaryApi;

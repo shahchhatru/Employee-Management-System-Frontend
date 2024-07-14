@@ -5,7 +5,7 @@ export interface Salary {
   tax: number;
   pf: number;
   netAmount: number;
-  employee: string;
+  user: string;
   month: string;
   year: string;
   organization: string;
@@ -17,10 +17,16 @@ export interface SalaryStateInputs {
   tax?: number;
   pf?: number;
   netAmount?: number;
-  employee?: string;
+  user?: string;
   month?: string;
   year?: string;
   organization?: string;
+}
+
+export interface SalaryInput {
+  employee: string;
+  month: string;
+  year: string;
 }
 
 export interface SalaryResponse {

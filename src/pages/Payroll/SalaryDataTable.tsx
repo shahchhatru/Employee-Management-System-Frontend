@@ -64,7 +64,7 @@ function SalaryDataTable() {
     {
       accessorKey: "name",
       header: "Name",
-      cell: ({ row }) => row.original.user.name,
+      cell: ({ row }) => row.original?.user?.name || " ",
     },
     {
       accessorKey: "salary",

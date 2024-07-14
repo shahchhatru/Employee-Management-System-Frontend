@@ -28,18 +28,26 @@ import {
   useClearBonusArrayMutation,
   useGetTotalBonusAmountQuery,
 } from "@/store/BonusSlice";
-import { Month } from '../../enums/month.enum';
+import { Month } from "../../enums/month.enum";
 import MonthSelect from "../components/MonthSelectBox";
 import YearSelect from "../components/YearSelectBox";
 import { useAddSalaryMutation } from "@/store/SalarySlice";
-
+import { toast } from "sonner";
 interface BonusActionTooltipProps {
   userId: string;
 }
 
 function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
   const [open, setOpen] = useState(false);
-  const [addSalary] = useAddSalaryMutation();
+  const [
+    addSalary,
+    {
+      isError: isAddSalaryError,
+      isLoading: isAddSalaryLoading,
+      isSuccess: isAddSalarySuccess,
+      data: addSalaryData,
+    },
+  ] = useAddSalaryMutation();
   const [isOpenAddBonus, setIsOpenAddBonus] = useState(false);
   const [isOpenRemoveBonus, setIsOpenRemoveBonus] = useState(false);
   const [isOpenClearBonus, setIsOpenClearBonus] = useState(false);
@@ -72,7 +80,22 @@ function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
   };
 
   const handleAddSalary = async () => {
+    console.log({ salaryMonth, salaryYear, userId });
+    while (isAddSalaryLoading);
     await addSalary({ employee: userId, month: salaryMonth, year: salaryYear });
+
+    if (isAddSalaryError) {
+      toast.error(
+        "Error adding salary" + JSON.stringify(addSalaryData, null, 2)
+      );
+      console.error("Error adding salary:", addSalaryData);
+    }
+    if (isAddSalarySuccess) {
+      toast.success(
+        "Salary added successfully" + JSON.stringify(addSalaryData, null, 2)
+      );
+      console.log("Salary added successfully:", addSalaryData);
+    }
     setIsOpenAddSalary(false);
     // You might want to add a refetch for salary data if needed
   };
@@ -185,7 +208,6 @@ function BonusActionTooltip({ userId }: BonusActionTooltipProps) {
               </DialogFooter>
             </DialogContent>
           </Dialog>
-
 
           {/* Total Bonus Display */}
           <span className="flex items-center">
